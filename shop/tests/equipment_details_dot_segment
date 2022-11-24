@@ -1,0 +1,13 @@
+       <!--
+                <div class="card wrap text-left kr_border_container1 m-2 p-2 rounded">
+                    <a href="{% url 'shop:equipment_update4' pk=equipment.pk %}"></a>
+                    <div class="text-left">
+                        <div class="kr_text_info_heading">DOT Inspections:</div>
+                        <div class="">
+                            <div class="text-muted">Last DOT Inspection: {{ equipment.equipment_last_dot }}</div>
+                            <div class="text-muted">Next DOT Inspection: {{ equipment.equipment_next_dot }}</div>
+                            <div class="text-muted">Passed last Inspection: {{ equipment.equipment_last_dot_status }}</div>
+                        </div>
+                    </div>
+                </div>
+                -->

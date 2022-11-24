@@ -1,0 +1,128 @@
+{% load active_link_tags %}
+<!DOCTYPE html>
+{% load static  from static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+{#    <link#}
+{#            rel="stylesheet"#}
+{#            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"#}
+{#            integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="#}
+{#            crossorigin="anonymous"#}
+{#            referrerpolicy="no-referrer"#}
+{#    />#}
+    <script src="https://kit.fontawesome.com/59c9c320cb.js" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}"/>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+            crossorigin="anonymous"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.6.1.js"
+            integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+            crossorigin="anonymous">
+    </script>
+
+    <script>
+
+    </script>
+
+
+    <title>Heritage Shop</title>
+
+</head>
+<body>
+{# START NAVBAR #}
+
+<nav class="stroke navbar navbar-expand-lg navbar-light p-3 fs-5" style="background-color: rgba(52,119,88,0.75);">
+    <div class="container-fluid">
+        <div><img alt="" width="40" height="50" class="d-inline-block align-text-top rounded" src="{% static 'Heritage green leaf.JPG' %}" alt=""></div>
+        <div class="navbar-brand fw-bolder fs-4 ms-3" > Heritage Landscape Shop</div>
+{#        <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"#}
+{#                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">#}
+{#            <span class="navbar-toggler-icon"></span>#}
+{#        </button>#}
+
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <ul class="navbar-nav">
+                <li class="nav-item {{ vehicle_nav }}">
+                    <a class="nav-link" href="{% url 'shop:vehicles_list' %}">Vehicles</a>
+                </li>
+                <li class="nav-item  {{ trailer_nav }}">
+                    <a class="nav-link" href="{% url 'shop:trailers_list' %}">Trailers</a>
+                </li>
+                <li class="nav-item {{ equipment_nav }}">
+                    <a class="nav-link" href="{% url 'shop:equipment_list' %}">Equipment</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Create
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                        <li><a class="dropdown-item" href="{% url 'shop:vehicle_create' %}">Vehicle</a></li>
+                        <li><a class="dropdown-item" href="{% url 'shop:trailer_create' %}">Trailer</a></li>
+                        <li><a class="dropdown-item" href="{% url 'shop:equipment_create' %}">Equipment</a></li>
+                    </ul>
+                </li>
+
+{#                <li class="nav-item dropdown">#}
+{#                    <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"#}
+{#                       data-bs-toggle="dropdown" aria-expanded="false">Inactive</a>#}
+{##}
+{#                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">#}
+{#                        <li><a class="dropdown-item" href="{% url 'shop:inactive_vehicle_list' %}">Vehicles</a></li>#}
+{#                        <li><a class="dropdown-item" href="{% url 'shop:trailer_create' %}">Trailers</a></li>#}
+{#                        <li><a class="dropdown-item" href="{% url 'shop:equipment_create' %}">Equipment</a></li>#}
+{#                    </ul>#}
+{#                </li>#}
+
+
+                <!-- Sample Stuff that is not currently used
+
+                <a class="nav-link disabled" href="">Blank1</a>
+                <a class="nav-link disabled" href="">Blank2</a>
+                <a class="nav-link disabled">Disabled</a>
+
+                -->
+
+                <!-- Start Create Button -->
+
+
+                <!-- End Create Button -->
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+{# END NAVBAR #}
+
+{% block content %}
+
+{% endblock content %}
+{% block extra_js %}{% endblock extra_js %}
+
+
+{# START FOOTER#}
+
+{# END FOOTER#}
+
+<!--
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+-->
+
+</body>
+</html>

@@ -1,0 +1,234 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+
+        <div class="row">
+
+            <!-- Start of Vehicle Details -->
+            <div class="kr_border_container1 p-2 rounded col-md-6 col-lg-4">
+                <!--Start Info Container -->
+                <div class="wrap card text-left kr_border_container1 m-2 p-2 rounded">
+                    <a href="{% url 'shop:vehicle_update1' pk=vehicle.pk %}"></a>
+                    <h5 class="display-12 font-weight-bold">Heritage ID: {{ vehicle.vehicle_identifier }}</h5>
+                    <div class="">
+                        <div class="text-muted">License: {{ vehicle.vehicle_license }}</div>
+                        <div class="text-muted">VIN: {{ vehicle.vehicle_vin }}</div>
+                        <div class="text-muted">Short Name {{ vehicle.vehicle_short_name }}</div>
+                        <div class="text-muted mb-2">Description {{ vehicle.vehicle_description }}</div>
+                    </div>
+                </div>
+
+                <div class="wrap card text-left kr_border_container1 m-2 p-2 rounded">
+                    <a href="{% url 'shop:vehicle_update2' pk=vehicle.pk %}"></a>
+                    <div class="text-left">
+                        <div class="kr_text_info_heading">Service Info:</div>
+                        <div class="">
+                            <div class="text-muted">Service Period {{ vehicle.service_period }}</div>
+                            <div class="text-muted">Last Service {{ vehicle.last_service }}</div>
+                            <div class="text-muted">Last Service Miles {{ vehicle.last_service_miles }}</div>
+                            <div class="text-muted mb-2">Next Service {{ vehicle.next_service }}</div>
+                        </div>
+                    </div>
+                    <div>
+
+                    </div>
+                </div>
+
+                <div class="card wrap text-left kr_border_container1 m-2 p-2 rounded">
+                    <a href="{% url 'shop:vehicle_update3' pk=vehicle.pk %}"></a>
+                    <div class="text-left">
+                        <div class="kr_text_info_heading">General Info:</div>
+                        <div class="">
+                            <div class="text-muted">Assigned Dept. {{ vehicle.vehicle_department }}</div>
+                            <div class="text-muted">Assigned Emp. {{ vehicle.assigned_employee }}</div>
+                            <div class="text-muted mb-2">Assigned
+                                Trailer {{ vehicle.assigned_trailer.trailer_license }}</div>
+                        </div>
+                    </div>
+                </div>
+                <!--End Info Container -->
+            </div>
+            <!-- End  of Vehicle Details -->
+
+            <!-- Start of Tabs -->
+            <div class="col-md-6 col-lg-8 affectedDiv">
+                <!-- Tabs navs -->
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="service-tab" data-toggle="tab" href=""
+                           data-target="#ServiceRecords"
+                           type="button" role="tab" aria-controls="ServiceRecords" aria-selected="true">Service
+                            Records
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="repair-tab" data-toggle="tab" href=""
+                           data-target="#RepairRecords"
+                           type="button" role="tab" aria-controls="profile" aria-selected="false">Repair Records
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="dot-tab" data-toggle="tab" data-target="#DotRecords"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false">DOT Inspections
+                        </button>
+                    </li>
+                </ul>
+
+
+                <!--Start Table Definitions-->
+                <div class="tab-content" id="myTabContent">
+                    <!--Start Table Definitions Service Record-->
+                    <div class="tab-pane fade show active" id="ServiceRecords" role="tabpanel"
+                         aria-labelledby="home-tab">
+                        <div class="bg-info flex">
+                            <div>
+                                <a href="{% url 'shop:service_record_create' pk=vehicle.pk %}"
+                                   class="btn btn-secondary float-right mt-2 mb-2" style="float:right"
+                                   role="button"
+                                   aria-disabled="true">Add Service Record</a>
+                            </div>
+                        </div>
+                        <table class="table table-striped table-bordered table-hover kr_table kr_background">
+                            <colgroup>
+                                <col class="w-15">
+                                <col class="w-15">
+                                <col class="w-70">
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th class="text-center">Service Date</th>
+                                <th class="text-center">Service Miles</th>
+                                <th class="text-center">Service Notes</th>
+                                <th class="text-center">Delete</th>
+                                <th class="text-center">Update</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for record in service_records_page_obj %}
+                                <tr>
+                                    <td class="text-center"> {{ record.service_date }} </td>
+                                    <td class="text-center">{{ record.service_miles }}</td>
+                                    <td class="text-center">{{ record.service_notes }}</td>
+                                    <td><span><a class="btn btn-secondary btn-sm"
+                                                 href="{% url 'shop:service_record_delete' id=record.id pk=vehicle.pk %}">Delete</a></span>
+                                    </td>
+                                    <td><span><a class="btn btn-secondary btn-sm"
+                                                 href="{% url 'shop:service_record_update' id=record.id pk=vehicle.pk %}">Update</a></span>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <!--Start Vehicle Table Pagination -->
+                        <nav aria-label="..." class="text-center">
+                            <div>
+                                {% if service_records_page_obj.has_previous %}
+                                    <a class="btn btn-outline-success mb-4" href="?page=1">First</a>
+                                    <a class="btn btn-outline-success mb-4"
+                                       href="?page={{ service_records_page_obj.previous_page_number }}">Previous</a>
+                                {% endif %}
+
+                                {% for num in service_records_page_obj.paginator.page_range %}
+                                    {% if page_obj.number == num %}
+                                        <a class="btn btn-success mb-4" href="?page={{ num }}">{{ num }}</a>
+                                    {% elif num > service_records_page_obj.number|add:'-3' and num < service_records_page_obj.number|add:'3' %}
+                                        <a class="btn btn-outline-success mb-4" href="?page={{ num }}">{{ num }}</a>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if service_records_page_obj.has_next %}
+                                    <a class="btn btn-outline-success mb-4"
+                                       href="?page={{ service_records_page_obj.next_page_number }}">Next</a>
+                                    <a class="btn btn-outline-success mb-4"
+                                       href="?page={{ service_records_page_obj.paginator.num_pages }}">Last</a>
+                                {% endif %}
+                            </div>
+                        </nav>
+                        <!--End Vehicle Table Pagination -->
+                    </div>
+                    <!-- ############################# -->
+                    <!--Start Table Definitions Repair Record-->
+                    <!-- ############################# -->
+                    <div class="tab-pane fade" id="RepairRecords" role="tabpanel" aria-labelledby="profile-tab">Repair
+                        <div class="bg-info flex">
+                            <div>
+                                <a href="{% url 'shop:repair_record_create' pk=vehicle.pk %}"
+                                   class="btn btn-secondary float-right mt-2 mb-2" style="float:right"
+                                   role="button"
+                                   aria-disabled="true">Add Repair Record</a>
+                            </div>
+                        </div>
+                        <table class="table table-striped table-bordered table-hover kr_table kr_background">
+                            <colgroup>
+                                <col class="w-15">
+                                <col class="w-15">
+                                <col class="w-70">
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th class="text-center">Repair Date</th>
+                                <th class="text-center">Repair Miles</th>
+                                <th class="text-center">Repiar Notes</th>
+                                <th class="text-center">Delete</th>
+                                <th class="text-center">Update</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for record in repair_records_page_obj %}
+                                <tr>
+                                    <td class="text-center"> {{ record.repair_date }} </td>
+                                    <td class="text-center">{{ record.repair_miles }}</td>
+                                    <td class="text-center">{{ record.repair_notes }}</td>
+                                    <td><span><a class="btn btn-secondary btn-sm"
+                                                 href="{% url 'shop:service_record_delete' id=record.id pk=vehicle.pk %}">Delete</a></span>
+                                    </td>
+                                    <td><span><a class="btn btn-secondary btn-sm"
+                                                 href="{% url 'shop:service_record_update' id=record.id pk=vehicle.pk %}">Update</a></span>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <!--Start Vehicle Table Pagination -->
+                        <nav aria-label="..." class="text-center">
+                            <div>
+                                {% if repair_records_page_obj.has_previous %}
+                                    <a class="btn btn-outline-success mb-4" href="?page=1">First</a>
+                                    <a class="btn btn-outline-success mb-4"
+                                       href="?page={{ repair_records_page_obj.previous_page_number }}">Previous</a>
+                                {% endif %}
+
+                                {% for num in repair_records_page_obj.paginator.page_range %}
+                                    {% if page_obj.number == num %}
+                                        <a class="btn btn-success mb-4" href="?page={{ num }}">{{ num }}</a>
+                                    {% elif num > repair_records_page_obj.number|add:'-3' and num < repair_records_page_obj.number|add:'3' %}
+                                        <a class="btn btn-outline-success mb-4" href="?page={{ num }}">{{ num }}</a>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if repair_records_page_obj.has_next %}
+                                    <a class="btn btn-outline-success mb-4"
+                                       href="?page={{ repair_records_page_obj.next_page_number }}">Next</a>
+                                    <a class="btn btn-outline-success mb-4"
+                                       href="?page={{ repair_records_page_obj.paginator.num_pages }}">Last</a>
+                                {% endif %}
+                            </div>
+                        </nav>
+                        <!--End Vehicle Table Pagination -->
+                    </div>
+                    <div class="tab-pane fade" id="DotRecords" role="tabpanel" aria-labelledby="contact-tab">DOT Records
+                        Table
+                        To Be Implemented
+                    </div>
+                </div>
+                <!-- End Tabs -->
+            </div>
+            <!-- End Tabs of Tabs -->
+        </div>
+        <!--End Vehicle Block -->
+    </div>
+{% endblock %}

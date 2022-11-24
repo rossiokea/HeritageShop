@@ -1,0 +1,340 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+
+        <div class="row">
+            <!-- Start of Vehicle Details -->
+            <div class="kr_border_container1 p-2 rounded col-md-6 col-lg-4">
+                <!--Start Info Container -->
+                <div class="wrap card text-left kr_border_container1 m-2 p-2 rounded">
+                    <a href="{% url 'shop:equipment_update1' pk=equipment.pk %}"></a>
+                    <div class="row">
+                        <h5 class="col-10 display-12 font-weight-bold">Heritage
+                            ID: {{ equipment.equipment_identifier }}</h5>
+                        <div class="col-2">
+                            <img src="{% static 'loader.png' %}" alt="" width="30" height="30">
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="row">
+                            <div class="col-4 text-muted">VIN:</div>
+                            <div class="col-8 text-dark text-align-left">{{ equipment.equipment_vin }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 text-muted">Short Name:</div>
+                            <div class="col-8 text-dark text-align-left">{{ equipment.equipment_short_name }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="text-muted mb-2">Description:</div>
+                            <div class="col-8 text-dark text-align-left">{{ equipment.equipment_description }}</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Start of Equipment Service Details -->
+                <div class="wrap card text-left kr_border_container1 m-2 p-2 rounded">
+                    <a href="{% url 'shop:equipment_update2' pk=equipment.pk %}"></a>
+                    <div class="text-left">
+                        <div class="kr_text_info_heading">Service Info:</div>
+                        <div class="">
+                            <div class="row">
+                                <div class="col-5 text-muted">Service Period (HR): </div>
+                                <div class="col-7 text-dark text-align-left"> {{ equipment.equipment_service_period }} </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5 text-muted">Last Service:</div>
+                                <div class="col-7 text-dark text-align-left"> {{ equipment.equipment_last_service_hours }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5 text-muted">Next Service:</div>
+                                <div class="col-7 text-dark text-align-left">{{ equipment.equipment_next_service_hours }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5 text-muted">Last Service:</div>
+                                <div class="col-7 text-dark text-align-left">{{ equipment.equipment_last_service }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5 text-muted">Next Service:</div>
+                                <div class="col-7 fw-bold text-dark text-align-left">{{ equipment.equipment_next_service }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                    </div>
+                </div>
+                <!-- Start General Info Card Section -->
+                <div class="card wrap text-left kr_border_container1 m-2 p-2 rounded">
+                    <a href="{% url 'shop:equipment_update3' pk=equipment.pk %}"></a>
+                    <div class="text-left">
+                        <div class="kr_text_info_heading">General Info:</div>
+                        <div class="">
+                            <div class="row">
+                                <div class="col-4 text-muted">Assigned Dept:</div>
+                                <div class="col-8 text-dark text-align-left">{{ equipment.equipment_department }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-muted">Assigned User:</div>
+                                <div class="col-8 text-dark text-align-left">{{ equipment.equipment_assigned_employee }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-muted">Project:</div>
+                                <div class="col-8 text-dark text-align-left">{{ equipment.equipment_assigned_project }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End General Info Card Section-->
+                <!-- Start DOT Info Card Section -->
+
+                <!-- End DOT Card Section-->
+
+            </div>
+            <!-- End  of Vehicle Details -->
+
+
+            <!-- ######### -->
+            <!-- Start of Record Pills -->
+            <!-- ######### -->
+            <div class="col-md-6 col-lg-8 affectedDiv">
+                <!-- Tabs navs -->
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-service-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-service"
+                                type="button" role="tab" aria-controls="pills-service" aria-selected="true">Equipment
+                            Service
+                            Records
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-repair-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-repair"
+                                type="button" role="tab" aria-controls="pills-repair" aria-selected="false">Equipment
+                            Repair
+                            Records
+                        </button>
+                    </li>
+                </ul>
+
+                <!-- ######### -->
+                <!--Start Service Records Area -->
+                <!--########## -->
+
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show" id="pills-service" role="tabpanel"
+                         aria-labelledby="pills-service-tab"
+                         tabindex="0" style="background-color: rgba(49, 117, 51, 0.26)">
+                        <!-- This is  the end of the Navigation section -->
+
+                        <div class="bg-info flex">
+                            <div>
+                                <a href="{% url 'shop:equipment_service_record_create' pk=equipment.pk %}"
+                                   class="btn btn-secondary float-right mt-2 mb-2" style="float:right"
+                                   role="button"
+                                   aria-disabled="true">Add Service Record</a>
+                            </div>
+                        </div>
+                        <table class="table table-striped table-bordered table-hover kr_table kr_background">
+                            <colgroup>
+                                <col class="w-15">
+                                <col class="w-10">
+                                <col class="w-55">
+                                <col class="w-15">
+
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th class="text-center">Service Date</th>
+                                <th class="text-center">Service Hours</th>
+                                <th class="text-center">Service Notes</th>
+                                <th class="text-center">Actions</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for record in service_records_page_obj %}
+                                <tr>
+                                    <td class="text-center"> {{ record.equipment_service_date }} </td>
+                                    <td class="text-center"> {{ record.equipment_service_hours }} </td>
+                                    <td class="text-center">{{ record.equipment_service_notes }}</td>
+
+                                    <td class="text-center">
+                                        <a class="btn btn-secondary btn-sm" title="Edit Repair Record"
+                                           href="{% url 'shop:equipment_service_record_update' id=record.id pk=equipment.pk %}"><img
+                                                class="img-fluid" src="{% static "icons8-edit-property-48.png" %}"
+                                                alt="Update" width="25" height="25"></a>
+
+                                        <a class="btn btn-secondary btn-sm" title="Delete Repair Record"
+                                           href="{% url 'shop:equipment_service_record_delete' id=record.id pk=equipment.pk %}"><img
+                                                class="img-responsive" src="{% static "icons8-remove-48.png" %}"
+                                                alt="Delete" width="25" height="25"></a>
+                                    </td>
+
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <!--Start Vehicle Service Table Pagination -->
+                        <nav aria-label="..." class="text-center">
+                            <div>
+                                {% if service_records_page_obj.has_previous %}
+                                    <a class="btn btn-outline-success mb-4" href="?page=1">First</a>
+                                    <a class="btn btn-outline-success mb-4"
+                                       href="?page={{ service_records_page_obj.previous_page_number }}">Previous</a>
+                                {% endif %}
+
+                                {% for num in service_records_page_obj.paginator.page_range %}
+                                    {% if service_records_page_obj.number == num %}
+                                        <a class="btn btn-success mb-4" href="?page={{ num }}">{{ num }}</a>
+                                    {% elif num > service_records_page_obj.number|add:'-3' and num < service_records_page_obj.number|add:'3' %}
+                                        <a class="btn btn-outline-success mb-4" href="?page={{ num }}">{{ num }}</a>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if service_records_page_obj.has_next %}
+                                    <a class="btn btn-outline-success mb-4"
+                                       href="?page={{ service_records_page_obj.next_page_number }}">Next</a>
+                                    <a class="btn btn-outline-success mb-4"
+                                       href="?page={{ service_records_page_obj.paginator.num_pages }}">Last</a>
+                                {% endif %}
+                            </div>
+                            <!-- End Service Record Pagination -->
+                        </nav>
+
+                        <!-- ######### -->
+                        <!--Start Repair Records Area -->
+                        <!--########## -->
+                    </div>
+
+                    <div class="tab-pane fade" id="pills-repair" role="tabpanel" aria-labelledby="pills-repair-tab"
+                         tabindex="0" style="background-color: rgba(49, 117, 51, 0.26)">
+
+                        <div>
+                            <div>
+                                <a href="{% url 'shop:equipment_repair_record_create' pk=equipment.pk %}"
+                                   class="btn btn-secondary float-right mt-2 mb-2" style="float:right"
+                                   role="button"
+                                   aria-disabled="true">Add Repair Record</a>
+                            </div>
+                        </div>
+                        <table class="table table-striped table-bordered table-hover kr_table kr_background">
+                            <colgroup>
+                                <col class="w-15">
+                                <col class="w-50">
+                                <col class="w-10">
+
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th class="text-center">Repair Date</th>
+                                <th class="text-center">Repiar Notes</th>
+                                <th class="text-center">Actions</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for record in repair_records_page_obj %}
+                                <tr>
+                                    <td class="text-center"> {{ record.equipment_repair_date }} </td>
+                                    <td class="text-center">{{ record.equipment_repair_notes }}</td>
+
+                                    <td class="text-center">
+                                        <a class="btn btn-secondary btn-sm" title="Edit Repair Record"
+                                           href="{% url 'shop:equipment_repair_record_update' id=record.id pk=equipment.pk %}"><img
+                                                class="img-fluid" src="{% static "icons8-edit-property-48.png" %}"
+                                                alt="Update" width="25" height="25"></a>
+
+                                        <a class="btn btn-secondary btn-sm" title="Delete Repair Record"
+                                           href="{% url 'shop:equipment_repair_record_delete' id=record.id pk=equipment.pk %}"><img
+                                                class="img-responsive" src="{% static "icons8-remove-48.png" %}"
+                                                alt="Delete" width="25" height="25"></a>
+                                    </td>
+
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <!--Start Vehicle Table Pagination -->
+                        <nav aria-label="..." class="text-center">
+                            <div>
+                                {% if repair_records_page_obj.has_previous %}
+                                    <a class="btn btn-outline-success mb-4" href="?page=1">First</a>
+                                    <a class="btn btn-outline-success mb-4"
+                                       href="?page={{ repair_records_page_obj.previous_page_number }}">Previous</a>
+                                {% endif %}
+
+                                {% for num in repair_records_page_obj.paginator.page_range %}
+                                    {% if repair_records_page_obj.number == num %}
+                                        <a class="btn btn-success mb-4" href="?page={{ num }}">{{ num }}</a>
+                                    {% elif num > repair_records_page_obj.number|add:'-3' and num < repair_records_page_obj.number|add:'3' %}
+                                        <a class="btn btn-outline-success mb-4" href="?page={{ num }}">{{ num }}</a>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if repair_records_page_obj.has_next %}
+                                    <a class="btn btn-outline-success mb-4"
+                                       href="?page={{ repair_records_page_obj.next_page_number }}">Next</a>
+                                    <a class="btn btn-outline-success mb-4"
+                                       href="?page={{ repair_records_page_obj.paginator.num_pages }}">Last</a>
+                                {% endif %}
+                            </div>
+                        </nav>
+                        <!--End Vehicle Table Pagination -->
+                    </div>
+
+                    <!-- ######### -->
+                    <!--Start Dot Records Area -->
+                    <!--########## -->
+
+                    <div class="tab-pane fade" id="pills-dot" role="tabpanel" aria-labelledby="pills-dot-tab"
+                         tabindex="0" style="background-color: rgba(49, 117, 51, 0.26)">
+
+                    </div>
+
+
+                </div>
+            </div>
+
+
+            <!-- End Tabs of Tabs -->
+        </div>
+        <!--End Vehicle Block -->
+    </div>
+    <script>
+        const pillsTab = document.querySelector('#pills-tab');
+        const pills = pillsTab.querySelectorAll('button[data-bs-toggle="pill"]');
+
+
+        pills.forEach(pill => {
+            pill.addEventListener('shown.bs.tab', (event) => {
+                const {target} = event;
+                const {id: targetId} = target;
+
+                savePillId(targetId);
+            });
+        });
+
+
+        const savePillId = (selector) => {
+            localStorage.setItem('activePillId', selector);
+        };
+
+        const getPillId = () => {
+            const activePillId = localStorage.getItem('activePillId');
+
+            // if local storage item is null, show default tab
+            if (!activePillId) return;
+
+            // call 'show' function
+            const someTabTriggerEl = document.querySelector(`#${activePillId}`)
+            const tab = new bootstrap.Tab(someTabTriggerEl);
+            tab.show();
+
+        };
+
+        // get pill id on load
+        getPillId();
+
+    </script>
+{% endblock %}

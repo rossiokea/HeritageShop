@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>jQuery UI Tabs - Default functionality</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+    <title> TabTest2 </title>
+</head>
+<body>
+
+<div id="tabs" class="affectedDiv">
+    <ul class="nav-tabs" id="myTabs">
+        <li><a href="#tabs-1" data-toggle='tab'>Tab 1</a></li>
+        <li><a href="#tabs-2" data-toggle='tab'>Tab 2</a></li>
+        <li><a href="#tabs-3" data-toggle='tab'>Tab 3</a></li>
+    </ul>
+    <div id="tabs-1">
+        <p>Tab 1</p>
+    </div>
+    <div id="tabs-2">
+        <p>Tab 2</p>
+    </div>
+    <div id="tabs-3">
+        <p>Tab 3</p>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $("#tabs").tabs();
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('a[data-toggle="tab"]').on('show.affectedDiv.tab', function (e) {
+            localStorage.setItem('activeTab', $(e.target).attr('href'));
+        });
+        let activeTab = localStorage.getItem('activeTab');
+        if (activeTab) {
+            $('#myTab a[href="' + activeTab + '"]').tab('show');
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Keep Selected Bootstrap Tab Active on Page Refresh</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script
+            src="https://code.jquery.com/jquery-3.6.1.js"
+            integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+            integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+            crossorigin="anonymous"></script>
+
+
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+</head>
+<body>
+<div class="m-3">
+    <ul class="nav nav-tabs" id="myTab">
+        <li class="nav-item active">
+            <a href="#SectionA" class="nav-link">Section A</a>
+        </li>
+        <li class="nav-item">
+            <a href="#SectionB" class="nav-link">Section B</a>
+        </li>
+        <li class="nav-item">
+            <a href="#SectionC" class="nav-link">Section C</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div id="SectionA">
+            <h3>Section A</h3>
+            <p>Aliquip placeat salvia cillum iphone...</p>
+        </div>
+        <div id="SectionB">
+            <h3>Section B</h3>
+            <p>Vestibulum nec erat eu nulla rhoncus fringilla...</p>
+        </div>
+        <div id="SectionC">
+            <h3>Section C</h3>
+            <p>Nullam hendrerit justo non leo aliquet...</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $(function () {
+            $("#myTab").tabs();
+        });
+
+        $('#tab a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+
+// store the currently selected tab in the hash value
+        $("ul.nav-tabs > li > a").on("shown.bs.tab", function (e) {
+            let id = $(e.target).attr("href").substring(1);
+            window.location.hash = id;
+        });
+
+// on load of the page: switch to the currently selected tab
+        var hash = window.location.hash;
+        $('#myTab a[href="' + hash + '"]').tab('show');
+
+    });
+</script>
+
+</body>
+</html>

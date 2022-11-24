@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+    <div class="container">
+        <div class="form-group row kr_border_container1 rounded">
+            <form action="" method="post" class="m-2">
+                <h3 class="border text-center mb-2 p-2">Create Vehicle</h3>
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input type="submit" value="Submit" class="btn btn-secondary">
+                <a href="{{ view.get_success_url }}" class='btn btn-secondary m-3'>Cancel</a>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

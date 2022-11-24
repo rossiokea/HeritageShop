@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% load static from static %}
+{% block content %}
+    <section class="bg-light">
+        <div class="container">
+            <div class="row  border border-2 border-dark kr_background_search rounded">
+                <!-- Start Search Section-->
+                <div class="row">
+                    <div class="col-md-2">
+                        <img src="{% static 'loader.png' %}" alt="" width="60" height="60">
+                    </div>
+                    <div class="col-md-4 justify-content-left d-flex align-items-center search_heading "> {{ object_list.count }}
+                        Equipment Items found
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="row">
+                            <form id=search_vehicles action="{% url 'shop:search_equipment' %}"
+                                  class="mt-2 mb-2 text-center form-inline">
+                                <select  class="align-top" name="item_status" id="item_status">
+                                    {% if not selected_item_status %}
+                                        <option value="Active" selected>Active</option>
+                                        <option value="Inactive">Inactive</option>
+                                    {% elif selected_item_status == 'Active' %}
+                                        <option value="Active" selected>Active</option>
+                                        <option value="Inactive">Inactive</option>
+                                    {% elif selected_item_status == 'Inactive' %}
+                                        <option value="Active">Active</option>
+                                        <option value="Inactive" selected>Inactive</option>
+                                    {% endif %}
+                                </select>
+                                <select  class="align-top" id=department name="department" class="mr-3">
+                                    {% if not selected_department %}
+                                        <option value="" selected> Select Department</option>
+                                        <option value=10>Construction (10)</option>
+                                        <option value=20>Maintenance (20)</option>
+                                        <option value=50> Admin (50)</option>
+                                    {% elif selected_department == '10' %}
+                                        <option value=10 selected>Construction (10)</option>
+                                    {% elif selected_department == '20' %}
+                                        <option value=20 selected>Maintenance (20)</option>
+                                    {% elif selected_department == '50' %}
+                                        <option value=""> ---</option>
+                                        <option value=10>Construction (10)</option>
+                                        <option value=20>Maintenance (20)</option>
+                                        <option value=50 selected> Admin (50)</option>
+                                    {% endif %}
+                                </select>
+                                {% if selected_q == "" %}
+                                    <input  class="align-top" class="search w-30 ml-5" type="text" id='q' name="q"
+                                           placeholder="Search...">
+                                {% else %}
+                                    <input  class="align-top" class="search w-30 ml-5" type="text" id='q' name="q"
+                                           value="{{ selected_q }}" placeholder="Search...">
+                                {% endif %}
+                                <button class="btn btn-secondary btn-outline-dark" type="submit">Search</button>
+                                <button onclick="clearOptions()"
+                                        class="btn btn-secondary btn-outline-dark" type="submit">Clear
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Search Section-->
+            </div>
+            <div class="row">
+                {% for equipment in equipment_page_obj %}
+                    <div class="col-md-6 col-lg-4">
+                    <div class="wrap card p-2 border border-dark" style="width: 20rem; border-radius: 1.25rem; margin: .5rem">
+                    <a href="{% url 'shop:equipment_details' pk=equipment.pk %}"></a>
+                    {#<img src="..." class="card-img-top" alt="..."> #}
+
+                    {% if equipment.equipment_next_service < today %}
+                        <div class="card-body border border-danger border-3 rounded-4">
+
+                    {% elif equipment.equipment_next_service < today_20 %}
+                        <div class="card-body border border-warning border-3 rounded-4">
+                    {% else %}
+                        <div class="card-body border">
+                    {% endif %}
+
+                <div class="card-title text-center fs-5">{{ equipment.equipment_short_name }}: {{ equipment.equipment_identifier }}</div>
+
+                <div class="row">
+                    <div class="col-sm text-center text-muted">
+                        VIN:
+                    </div>
+                    <div class="col-sm text-dark">
+                        {{ equipment.equipment_vin }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm text-center text-muted">
+                        Short Name:
+                    </div>
+                    <div class="col-sm text-dark">
+                        {{ equipment.equipment_short_name }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm text-center text text-muted">
+                        Assigned To:
+                    </div>
+                    <div class="col-sm text-dark">
+                        {{ equipment.equipment_assigned_employee }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm text-center text text-muted">Next Service:</div>
+                    {% if equipment.equipment_next_service < today %}
+                        <div class="col-sm fw-bold border border-danger border-2 rounded">{{ equipment.equipment_next_service }}</div>
+                    {% elif equipment.equipment_next_service <= today_20 %}
+                        <div class="col-sm fw-bold border border-warning border-2 rounded" >{{ equipment.equipment_next_service }}</div>
+                    {% else %}
+                        <div class="col-sm text-dark">{{ equipment.equipment_next_service }}</div>
+                    {% endif %}
+                </div>
+
+
+                </div>
+
+                </div>
+                </div>
+                {% endfor %}
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                <!--Start equipment Table Pagination -->
+                <form action="">
+                    <nav aria-label="..." class="text-center">
+                        <div>
+                            {% if equipment_page_obj.has_previous %}
+                                <a class="btn btn-outline-success mb-4" href="?page=1">First</a>
+                                <a class="btn btn-outline-success mb-4"
+                                   href="?page={{ equipment_page_obj.previous_page_number }}&department={{ department }}&q={{ q }}&item_status={{ selected_item_status }}">Previous</a>
+                            {% endif %}
+
+                            {% for num in equipment_page_obj.paginator.page_range %}
+                                {% if equipment_page_obj.number == num %}
+                                    <a class="btn btn-success mb-4"
+                                       href="?page={{ num }}&department={{ department }}&q={{ q }}&item_status={{ selected_item_status }}">{{ num }}</a>
+                                {% elif num > equipment_page_obj.number|add:'-3' and num < equipment_page_obj.number|add:'3' %}
+                                    <a class="btn btn-outline-success mb-4"
+                                       href="?page={{ num }}&department={{ department }}&q={{ q }}&item_status={{ selected_item_status }}">{{ num }}</a>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if equipment_page_obj.has_next %}
+                                <a class="btn btn-outline-success mb-4"
+                                   href="?page={{ equipment_page_obj.next_page_number }}&department={{ department }}&q={{ q }}&item_status={{ selected_item_status }}">Next</a>
+                                <a class="btn btn-outline-success mb-4"
+                                   href="?page={{ equipment_page_obj.paginator.num_pages }}&department={{ department }}&q={{ q }}&item_status={{ selected_item_status }}">Last</a>
+                            {% endif %}
+                        </div>
+                        <!-- End Service Record Pagination -->
+                    </nav>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+    <script type='text/javascript'>
+        let text = $("#department :selected").text();
+        let value = $("#department").val();
+
+    </script>
+
+
+{% endblock content %}
+
+{% block extra_js %}
+
+    <script type='text/javascript'>
+
+        function clearOptions() {
+            document.getElementById('q').value = ''
+            document.getElementById('department').value = ''
+            document.getElementById('item_status').value = 'Active'
+
+        }
+    </script>
+{% endblock extra_js %}
