@@ -103,8 +103,11 @@ urlpatterns = [
          name='equipment_repair_record_delete'),
     path('equipment_repair_record_update/<int:id> <int:pk>', EquipmentRepairRecordUpdateView.as_view(),
          name='equipment_repair_record_update'),
-    #  Inactive Assests Search Lists
-    path('inactive_vehicle_list/', VehicleInactiveListView.as_view(), name='inactive_vehicle_list'),
+
+    #  Service Tasks Menu Item
+    path('all_service_tasks/', AllServiceTasksListView, name='all_service_tasks'),
+
 ]
+
 
 #    path('xxx/', ListVehiclesView.as_view(), name='list_vehicles'),

@@ -95,6 +95,7 @@ table.table-bordered > tbody > tr > td {
 }
 
 
+
 /*.kr_background2 {*/
 /*    background-color: #7fa37c*/
 /*}*/
@@ -292,4 +293,32 @@ nav a:hover {
 
 thead{
     background-color: rgba(20,131,69,0.48)
+}
+
+
+
+/*Testing Below*/
+
+table#service_table {
+    border-collapse: collapse;
+}
+#service_table tr {
+    background-color: rgba(36, 227, 121, 0.48);
+    border-top: 1px solid #fff;
+}
+#service_table tr:hover {
+    background-color: rgba(240, 209, 8, 0.34);
+}
+#service_table th {
+    background-color: #fff;
+}
+#service_table th, #service_table td {
+    padding: 3px 5px;
+}
+#service_table td:hover {
+    cursor: pointer;
+}
+
+.kr_table_status_danger{ !important;
+    background-color: red;
 }

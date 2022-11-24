@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+    <section class="container mt-5 border">
+
+        <table class="table table-striped table-bordered fs-5" id="service_table">
+            <tr class="border border-dark">
+                <th>&nbsp;</th>
+                <th>Dept</th>
+                <th>Service Item</th>
+                <th>Short Description</th>
+                <th>Description</th>
+                <th>Required Date</th>
+            </tr>
+            <tbody>
+            {% for item in required_service %}
+                <tr>
+                    {% if item.this_type == 'vehicle' %}
+                        {% if item.this_service_date <= today %}
+                            <td style="background-color: red"><a
+                                    href="{% url 'shop:detail_vehicles' pk=item.pk %}"><img
+                                    src="{% static 'dump-truck.png' %}" width="25" height="25" alt=""></a>
+                            </td>
+                        {% else %}
+                            <td style="background-color: yellow">
+                                <a
+                                        href="{% url 'shop:detail_vehicles' pk=item.pk %}"><img
+                                        src="{% static 'dump-truck.png' %}" width="25" height="25" alt=""></a>
+                            </td>
+                        {% endif %}
+
+                        <td>{{ item.vehicle_department }}</td>
+
+                    {% elif item.this_type == 'trailer' %}
+                        {% if item.this_service_date <= today %}
+                            <td style="background-color: red"><a
+                                    href="{% url 'shop:trailer_details' pk=item.pk %}"><img
+                                    src="{% static 'trailer.png' %}" width="25" height="25" alt=""></a>
+                            </td>
+                        {% else %}
+                            <td style="background-color: yellow">
+                                <a
+                                        href="{% url 'shop:trailer_details' pk=item.pk %}"><img
+                                        src="{% static 'trailer.png' %}" width="25" height="25" alt=""></a>
+                            </td>
+                        {% endif %}
+                        <td>{{ item.trailer_department }}</td>
+
+                    {% elif item.this_type == 'equipment' %}
+                        {% if item.this_service_date <= today %}
+                            <td style="background-color: red"><a
+                                    href="{% url 'shop:equipment_details' pk=item.pk %}"><img
+                                    src="{% static 'loader.png' %}" width="25" height="25" alt=""></a>
+                            </td>
+                        {% else %}
+                            <td style="background-color: yellow">
+                                <a
+                                        href="{% url 'shop:equipment_details' pk=item.pk %}"><img
+                                        src="{% static 'loader.png' %}" width="25" height="25" alt=""></a>
+                            </td>
+                        {% endif %}
+                        <td>{{ item.equipment_department }}</td>
+                    {% endif %}
+                    <td>{{ item.this_identifier }}</td>
+                    <td>{{ item.this_short_description }}</td>
+                    <td>{{ item.this_description }}</td>
+                    <td>{{ item.this_service_date }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+
+    </section>
+    <script>
+        $(document).ready(function () {
+
+            $('#service_table tr').click(function () {
+                let href = $(this).find("a").attr("href");
+                if (href) {
+                    window.location = href;
+                }
+            });
+
+        });
+    </script>
+{% endblock content %}
+
+
+

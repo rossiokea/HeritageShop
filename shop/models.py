@@ -5,6 +5,7 @@ from django.db import models
 IS_ACTIVE = [(True, 'Active'), (False, 'Inactive')]
 DOT_STATUS = [(True, 'Passed'), (False, 'Failed')]
 
+
 # Create your models here.
 class Trailer(models.Model):
     trailer_id = models.AutoField(primary_key=True, editable=False)
@@ -81,7 +82,7 @@ class VehicleDotRecord(models.Model):
     dot_inspection_date = models.DateField()
     dot_miles = models.IntegerField(blank=True, null=True)
     dot_repair_notes = models.TextField(max_length=200, blank=True, null=True)
-    dot_passed_inspection = models.BooleanField(choices=DOT_STATUS,  default=True)
+    dot_passed_inspection = models.BooleanField(choices=DOT_STATUS, default=True)
     vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
 
 
@@ -155,6 +156,9 @@ class Equipment(models.Model):
 
     # Trailer Status
     equipment_status = models.BooleanField(choices=IS_ACTIVE, default=True, blank=True)
+
+    def __str__(self):
+        return f"Equipment ID: {self.equipment_identifier} VIN: {self.equipment_vin}"
 
 
 class EquipmentServiceRecord(models.Model):

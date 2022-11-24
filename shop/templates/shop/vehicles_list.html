@@ -79,7 +79,8 @@
             <div class="row">
                 {% for vehicle in vehicles_page_obj %}
                     <div class="col-md-6 col-lg-4">
-                    <div class="wrap card p-2 border border-dark" style="width: 20rem; border-radius: 1.25rem; margin: .5rem">
+                    <div class="wrap card p-2 border border-dark"
+                         style="width: 20rem; border-radius: 1.25rem; margin: .5rem">
                     <a href="{% url 'shop:detail_vehicles' pk=vehicle.pk %}"></a>
                     {#<img src="..." class="card-img-top" alt="..."> #}
 
@@ -137,14 +138,6 @@
                         {{ vehicle.assigned_employee }}
                     </div>
                 </div>
-                {#                <div class="row">#}
-                {#                    <div class="col-sm text-center text text-muted">#}
-                {#                        Status:#}
-                {#                    </div>#}
-                {#                    <div class="col-sm text-dark">#}
-                {#                        {{ vehicle.get_vehicle_status_display }}#}
-                {#                    </div>#}
-                {#                </div>#}
 
                 </div>
 

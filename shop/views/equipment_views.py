@@ -46,6 +46,7 @@ class EquipmentListView(ListView):
         context_mod['vehicle_nav'] = ''
         context_mod['trailer_nav'] = ''
         context_mod['equipment_nav'] = 'active'
+        context_mod['service_nav'] = ''
 
         # context_mod['vehicle_list'] = vehicles
 
@@ -127,6 +128,7 @@ class EquipmentDetailsView(DetailView):
         context['vehicle_nav'] = ''
         context['trailer_nav'] = ''
         context['equipment_nav'] = 'active'
+        context['service_nav'] = ''
 
         return context
 
@@ -306,6 +308,7 @@ class EquipmentSearchListView(ListView):
         context_mod['trailer_nav'] = ''
         context_mod['vehicle_nav'] = ''
         context_mod['equipment_nav'] = 'active'
+        context_mod['service_nav'] = ''
 
         # context['vehicle_list'] = queryset
         # context_mod['vehicle_list'] = vehicles

@@ -1,5 +1,8 @@
 import datetime
+import operator
 from datetime import timedelta
+
+from django.http import HttpResponse
 
 from django.core.paginator import Paginator
 from django.shortcuts import render
@@ -16,6 +19,8 @@ from shop.models import *
 
 from shop.forms.vehicle_forms import *
 from shop.forms.trailer_forms import *
+
+from itertools import chain
 
 
 # Create your views here.
@@ -320,6 +325,7 @@ class SearchListVehiclesView(ListView):
         context_mod['trailer_nav'] = ''
         context_mod['vehicle_nav'] = 'active'
         context_mod['equipment_nav'] = ''
+        context_mod['service_nav']=''
 
         # context['vehicle_list'] = queryset
         # context_mod['vehicle_list'] = vehicles
@@ -691,3 +697,55 @@ class VehicleInactiveListView(ListView):
         context['today_20'] = datetime.date.today() + timedelta(14)
 
         return context
+
+
+def AllServiceTasksListView(request):
+    pass
+    print("I am getting all things that need service")
+
+    today = datetime.date.today()
+    today_20 = datetime.date.today() + timedelta(14)
+
+    vehicles = Vehicle.objects.all().filter(next_service__lte=today_20)
+    trailers = Trailer.objects.all().filter(trailer_next_service__lte=today_20)
+    equipments = Equipment.objects.all().filter(equipment_next_service__lte=today_20)
+
+    # print(vehicles)
+    # print(trailers)
+    # print(excavators)
+
+    for vehicle in vehicles:
+        vehicle.this_service_date = vehicle.next_service
+        vehicle.this_identifier = vehicle.vehicle_identifier
+        vehicle.this_short_description = vehicle.vehicle_short_name
+        vehicle.this_description = vehicle.vehicle_description
+        vehicle.this_type = 'vehicle'
+
+    for trailer in trailers:
+        trailer.this_service_date = trailer.trailer_next_service
+        trailer.this_identifier = trailer.trailer_identifier
+        trailer.this_short_description = trailer.trailer_short_name
+        trailer.this_description = trailer.trailer_description
+        trailer.this_type = 'trailer'
+
+    for equipment in equipments:
+        equipment.this_service_date = equipment.equipment_next_service
+        equipment.this_identifier = equipment.equipment_identifier
+        equipment.this_short_description = equipment.equipment_short_name
+        equipment.this_description = equipment.equipment_description
+        equipment.this_type = 'equipment'
+
+    required_service = sorted(chain(vehicles, trailers, equipments), key=operator.attrgetter('this_service_date'),
+                              reverse=False)
+
+    context_mod = dict(required_service=required_service)
+
+    context_mod['trailer_nav'] = ''
+    context_mod['vehicle_nav'] = ''
+    context_mod['equipment_nav'] = ''
+    context_mod['service_nav'] = 'active'
+
+    context_mod['today'] = today
+    context_mod['today_20'] = today_20
+    print(context)
+    return render(request, "shop/required_service.html", context=context_mod)
