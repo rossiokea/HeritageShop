@@ -8,8 +8,10 @@ from shop.views.equipment_views import *
 app_name = 'shop'
 
 urlpatterns = [
-    path('home/', shop.views.vehicle_views.home_page, name='home'),
-    path('', ListVehiclesView.as_view(), name='vehicles_list'),
+    #    path('home/', shop.views.vehicle_views.home_page, name='home'),
+    path('', AllServiceTasksListView, name='all_service_tasks'),
+
+    path('vehicles_list', ListVehiclesView.as_view(), name='vehicles_list'),
     path('vehicles_details/<int:pk>', VehicleDetailsView.as_view(), name='detail_vehicles'),
     path('vehicile_create/', VehicleCreateView.as_view(), name='vehicle_create'),
     path('vehicile_update1/<int:pk>', VehicleUpdate1.as_view(), name='vehicle_update1'),
@@ -108,6 +110,5 @@ urlpatterns = [
     path('all_service_tasks/', AllServiceTasksListView, name='all_service_tasks'),
 
 ]
-
 
 #    path('xxx/', ListVehiclesView.as_view(), name='list_vehicles'),

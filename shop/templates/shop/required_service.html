@@ -13,7 +13,7 @@
                 <th>Service Item</th>
                 <th>Short Description</th>
                 <th>Description</th>
-                <th>Required Date</th>
+                <th>Service Date</th>
             </tr>
             <tbody>
             {% for item in required_service %}
@@ -72,9 +72,37 @@
             {% endfor %}
             </tbody>
         </table>
+                        {# Start the Pagination Section       #}
+        <form action="" class="text-center">
+            <nav aria-label="...">
+                {% if required_service.has_previous %}
+                    <a class="btn btn-outline-success mb-4"
+                       href="?page={{ num }}&department={{ selected_department }}&q={{ selected_q }}&item_status={{ selected_item_status }}">First</a>
+                    <a class="btn btn-outline-success mb-4"
+                       href="?page={{ vehicles_page_obj.previous_page_number }}&department={{ selected_department }}&q={{ selected_q }}&item_status={{ selected_item_status }}">Previous</a>
+                {% endif %}
 
+                {% for num in required_service.paginator.page_range %}
+                    {% if required_service.number == num %}
+                        <a class="btn btn-success mb-4"
+                           href="?page={{ num }}">{{ num }}</a>
+                    {% elif num > required_service.number|add:'-3' and num < vehicles_page_obj.number|add:'3' %}
+                        <a class="btn btn-outline-success mb-4"
+                           href="?page={{ num }}">{{ num }}</a>
+                    {% endif %}
+                {% endfor %}
+                {% if required_service.has_next %}
+                    <a class="btn btn-outline-success mb-4"
+                       href="?page={{ required_service.next_page_number }}">Next</a>
+                    <a class="btn btn-outline-success mb-4"
+                       href="?page={{ required_service.paginator.num_pages }}">Last</a>
+                {% endif %}
 
+            </nav>
+        </form>
+                            {# Endthe Pagination Section       #}
     </section>
+
     <script>
         $(document).ready(function () {
 

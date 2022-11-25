@@ -703,17 +703,17 @@ def AllServiceTasksListView(request):
     pass
     print("I am getting all things that need service")
 
+    # Get the dates for today and 14 days into the future for service date calculations
     today = datetime.date.today()
     today_20 = datetime.date.today() + timedelta(14)
 
+    # Get all the Objects that could require Servicing
     vehicles = Vehicle.objects.all().filter(next_service__lte=today_20)
     trailers = Trailer.objects.all().filter(trailer_next_service__lte=today_20)
     equipments = Equipment.objects.all().filter(equipment_next_service__lte=today_20)
 
-    # print(vehicles)
-    # print(trailers)
-    # print(excavators)
-
+    # Add the properties that will be displayed in the results since they are to a specific model
+    # We need to generalize them ex vehicle_short_name will be this_short_name
     for vehicle in vehicles:
         vehicle.this_service_date = vehicle.next_service
         vehicle.this_identifier = vehicle.vehicle_identifier
@@ -738,7 +738,15 @@ def AllServiceTasksListView(request):
     required_service = sorted(chain(vehicles, trailers, equipments), key=operator.attrgetter('this_service_date'),
                               reverse=False)
 
-    context_mod = dict(required_service=required_service)
+    # Set up The Pagination
+    paginated_service_tasks = Paginator(required_service, 15)
+    page_number = request.GET.get('page')
+    service_tasks_page_obj = paginated_service_tasks.get_page(page_number)
+
+    # End Pagination Set up
+
+    # Add the paginated info to context dictionary
+    context_mod = dict(required_service=service_tasks_page_obj)
 
     context_mod['trailer_nav'] = ''
     context_mod['vehicle_nav'] = ''
@@ -747,5 +755,5 @@ def AllServiceTasksListView(request):
 
     context_mod['today'] = today
     context_mod['today_20'] = today_20
-    print(context)
+
     return render(request, "shop/required_service.html", context=context_mod)
