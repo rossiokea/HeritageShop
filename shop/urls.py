@@ -109,6 +109,8 @@ urlpatterns = [
     #  Service Tasks Menu Item
     path('all_service_tasks/', AllServiceTasksListView, name='all_service_tasks'),
 
+    # DOT Tasks Menu Item
+    path('all_dot_tasks/', AllDotTasksListView, name='all_dot_tasks'),
 ]
 
 #    path('xxx/', ListVehiclesView.as_view(), name='list_vehicles'),

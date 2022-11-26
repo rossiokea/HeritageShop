@@ -60,6 +60,7 @@ class ListVehiclesView(ListView):
         context_mod['vehicle_nav'] = 'active'
         context_mod['trailer_nav'] = ''
         context_mod['equipment_nav'] = ''
+        context_mod['dot_nav'] = ''
 
         context_mod['vehicle_list'] = vehicles
 
@@ -119,6 +120,7 @@ class VehicleDetailsView(DetailView):
         context['vehicle_nav'] = 'active'
         context['trailer_nav'] = ''
         context['equipment_nav'] = ''
+        context['dot_nav'] = ''
 
         return context
 
@@ -325,7 +327,7 @@ class SearchListVehiclesView(ListView):
         context_mod['trailer_nav'] = ''
         context_mod['vehicle_nav'] = 'active'
         context_mod['equipment_nav'] = ''
-        context_mod['service_nav']=''
+        context_mod['service_nav'] = ''
 
         # context['vehicle_list'] = queryset
         # context_mod['vehicle_list'] = vehicles
@@ -735,7 +737,8 @@ def AllServiceTasksListView(request):
         equipment.this_description = equipment.equipment_description
         equipment.this_type = 'equipment'
 
-    required_service = sorted(chain(vehicles, trailers, equipments), key=operator.attrgetter('this_service_date'),
+    # Combine all Objects into one List
+    required_service = sorted(chain(vehicles, trailers), key=operator.attrgetter('this_service_date'),
                               reverse=False)
 
     # Set up The Pagination
@@ -752,8 +755,60 @@ def AllServiceTasksListView(request):
     context_mod['vehicle_nav'] = ''
     context_mod['equipment_nav'] = ''
     context_mod['service_nav'] = 'active'
+    context_mod['dot_nav'] = ''
 
     context_mod['today'] = today
     context_mod['today_20'] = today_20
 
-    return render(request, "shop/required_service.html", context=context_mod)
+    return render(request, "shop/required_service_tasks.html", context=context_mod)
+
+
+def AllDotTasksListView(request):
+    print("Entering DOT Task List")
+    # Get the dates for today and 14 days into the future for service date calculations
+    today = datetime.date.today()
+    today_20 = datetime.date.today() + timedelta(14)
+
+    # Get the Objects that will be evaluated for DOT Inspections
+    vehicles = Vehicle.objects.all().filter(next_dot__lte=today_20)
+    trailers = Trailer.objects.all().filter(trailer_next_dot__lte=today_20)
+
+    # Add the properties that will be displayed in the results since they are to a specific model
+    # We need to generalize them ex vehicle_short_name will be this_short_name
+    for vehicle in vehicles:
+        vehicle.this_next_dot = vehicle.next_dot
+        vehicle.this_identifier = vehicle.vehicle_identifier
+        vehicle.this_short_description = vehicle.vehicle_short_name
+        vehicle.this_description = vehicle.vehicle_description
+        vehicle.this_type = 'vehicle'
+
+    for trailer in trailers:
+        trailer.this_next_dot = trailer.trailer_next_dot
+        trailer.this_identifier = trailer.trailer_identifier
+        trailer.this_short_description = trailer.trailer_short_name
+        trailer.this_description = trailer.trailer_description
+        trailer.this_type = 'trailer'
+
+    # Combine all Objects into one List
+    required_dot_tasks = sorted(chain(vehicles, trailers), key=operator.attrgetter('this_next_dot'),
+                              reverse=False)
+
+    # Set up The Pagination
+    paginated_dot_tasks = Paginator(required_dot_tasks, 15)
+    page_number = request.GET.get('page')
+    dot_tasks_page_obj = paginated_dot_tasks.get_page(page_number)
+
+        # End Pagination Set up
+    # Add the paginated info to context dictionary
+    context_mod = dict(required_dot_tasks=dot_tasks_page_obj)
+
+    context_mod['trailer_nav'] = ''
+    context_mod['vehicle_nav'] = ''
+    context_mod['equipment_nav'] = ''
+    context_mod['service_nav'] = ''
+    context_mod['dot_nav'] = 'active'
+
+    context_mod['today'] = today
+    context_mod['today_20'] = today_20
+
+    return render(request, "shop/required_dot_tasks.html", context=context_mod)

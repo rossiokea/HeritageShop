@@ -51,6 +51,7 @@ class TrailerListView(ListView):
         context['trailer_nav'] = 'active'
         context['equipment_nav'] = ''
         context['service_nav'] = ''
+        context['dot_nav'] = ''
 
         context['trailers_list'] = Trailer.objects.all().order_by('trailer_next_service')
         print(context['trailers_list'])
@@ -144,6 +145,7 @@ class TrailerDetailsView(DetailView):
         context['trailer_nav'] = 'active'
         context['equipment_nav'] = ''
         context['service_nav'] = ''
+        context['dot_nav'] = ''
 
         return context
 
@@ -308,6 +310,7 @@ class TrailerSearchListView(ListView):
         context_mod['vehicle_nav'] = ''
         context_mod['equipment_nav'] = ''
         context_mod['service_nav'] = ''
+        context_mod['dot_nav'] = ''
 
         # context['vehicle_list'] = queryset
         context_mod['today'] = datetime.date.today()
