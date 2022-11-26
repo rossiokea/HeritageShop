@@ -262,7 +262,7 @@ class SearchListVehiclesView(ListView):
 
         print(f"Q is: {qsearch}\nDepartment is: {dsearch}\nStatus is: {status}")
 
-        # Perform the base query to select either active or inactive vehicles
+        # Perform the enhanced Query for when other search items selected in the query
         if status == 'Active':
             print(f"Searching for {status} Vehicles")
             queryset_status = Vehicle.objects.all().order_by(F('next_service').asc(nulls_last=True)).filter(

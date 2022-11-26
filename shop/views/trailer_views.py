@@ -252,7 +252,7 @@ class TrailerSearchListView(ListView):
             queryset_status = Trailer.objects.all().order_by(F('trailer_short_name').asc(nulls_last=True)).filter(
                 trailer_status=False)
 
-        # Perform the enchance Query for when other search items selected
+        # Perform the enhanced Query for when other search items selected
         if dsearch and not qsearch:
             print(f"Hello I am in department only: {dsearch}")
             queryset = queryset_status.filter(trailer_department=dsearch).order_by('trailer_next_service')
