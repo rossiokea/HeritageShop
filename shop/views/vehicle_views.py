@@ -265,16 +265,16 @@ class SearchListVehiclesView(ListView):
         # Perform the enhanced Query for when other search items selected in the query
         if status == 'Active':
             print(f"Searching for {status} Vehicles")
-            queryset_status = Vehicle.objects.all().order_by(F('next_service').asc(nulls_last=True)).filter(
+            queryset_status = Vehicle.objects.all().order_by(F('vehicle_identifier').asc(nulls_last=True)).filter(
                 vehicle_status=True)
         else:
             print(f"Searching for {status} Vehicles")
-            queryset_status = Vehicle.objects.all().order_by(F('next_service').asc(nulls_last=True)).filter(
+            queryset_status = Vehicle.objects.all().order_by(F('vehicle_identifier').asc(nulls_last=True)).filter(
                 vehicle_status=False)
 
         if dsearch and not qsearch:
             print(f"Hello I am in department only: {dsearch}")
-            queryset = queryset_status.filter(vehicle_department=dsearch).order_by('next_service')
+            queryset = queryset_status.filter(vehicle_department=dsearch).order_by('vehicle_identifier')
             print(queryset)
             return queryset
 
@@ -285,7 +285,8 @@ class SearchListVehiclesView(ListView):
             q_des = Q(vehicle_description__icontains=qsearch)
             q_id = Q(vehicle_identifier__icontains=qsearch)
             q_license = Q(vehicle_license__icontains=qsearch)
-            queryset = queryset_status.filter(Q(q_short_des | q_assigned | q_des | q_id | q_license))
+            queryset = queryset_status.filter(Q(q_short_des | q_assigned | q_des | q_id | q_license)).order_by(
+                'vehicle_identifier')
 
             return queryset
 
@@ -296,19 +297,19 @@ class SearchListVehiclesView(ListView):
                   Q(assigned_employee__icontains=qsearch) |
                   Q(vehicle_description__icontains=qsearch) |
                   Q(vehicle_license__icontains=qsearch)) &
-                Q(vehicle_department=dsearch))
+                Q(vehicle_department=dsearch)).order_by('vehicle_identifier')
             return queryset
         else:
             print("There was no q")
 
         # Return the Initial Query since there was no department or q selected
-        return queryset_status.order_by('next_service')
+        return queryset_status.order_by('vehicle_identifier')
 
     def get_context_data(self, *args, **kwargs):
         context_mod = super(SearchListVehiclesView, self).get_context_data(**kwargs)
 
-        # Get the Query Set from the get_query set function
-        vehicles = self.get_queryset().order_by(F('next_service').asc(nulls_last=True))
+        # Get the Query Set from the get_query set function and select the order by
+        vehicles = self.get_queryset().order_by(F('vehicle_identifier').asc(nulls_last=True))
         print(f"The Vehicles Object is: {vehicles.count()}")
         # *************Paginating the VEHICLE DATA ****************
         # Paginate The List

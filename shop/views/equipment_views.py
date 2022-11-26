@@ -289,7 +289,8 @@ class EquipmentSearchListView(ListView):
         context_mod = super(EquipmentSearchListView, self).get_context_data(**kwargs)
 
         # Get the Query Set from the get_query set function
-        equipment = self.get_queryset().order_by(F('equipment_next_service').asc(nulls_last=True))
+        equipment = self.get_queryset().order_by(F('equipment_identifier').asc(nulls_last=True))
+
         print(f"The Equipment Object is: {equipment.count()}")
         # *************Paginating the VEHICLE DATA ****************
         # Paginate The List

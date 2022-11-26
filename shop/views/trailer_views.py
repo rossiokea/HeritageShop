@@ -291,7 +291,7 @@ class TrailerSearchListView(ListView):
         queryset = self.get_queryset()
 
         # *************Paginating the Trailer DATA ****************
-        trailers = queryset.order_by(F('trailer_next_service').asc(nulls_last=True))
+        trailers = queryset.order_by(F('trailer_identifier').asc(nulls_last=True))
 
         # Paginate the Service Records:
         paginated_trailers = Paginator(trailers, 9)
