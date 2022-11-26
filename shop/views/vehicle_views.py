@@ -715,7 +715,7 @@ def AllServiceTasksListView(request):
     vehicles = Vehicle.objects.all().filter(next_service__lte=today_20)
     trailers = Trailer.objects.all().filter(trailer_next_service__lte=today_20)
     equipments = Equipment.objects.all().filter(equipment_next_service__lte=today_20)
-
+    print(equipments)
     # Add the properties that will be displayed in the results since they are to a specific model
     # We need to generalize them ex vehicle_short_name will be this_short_name
     for vehicle in vehicles:
@@ -740,9 +740,9 @@ def AllServiceTasksListView(request):
         equipment.this_type = 'equipment'
 
     # Combine all Objects into one List
-    required_service = sorted(chain(vehicles, trailers), key=operator.attrgetter('this_service_date'),
+    required_service = sorted(chain(vehicles, trailers, equipments), key=operator.attrgetter('this_service_date'),
                               reverse=False)
-
+    print(required_service)
     # Set up The Pagination
     paginated_service_tasks = Paginator(required_service, 15)
     page_number = request.GET.get('page')
