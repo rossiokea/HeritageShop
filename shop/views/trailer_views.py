@@ -265,14 +265,16 @@ class TrailerSearchListView(ListView):
             # q_assigned = Q(assigned_employee__icontains=qsearch)
             q_des = Q(trailer_description__icontains=qsearch)
             q_id = Q(trailer_identifier__icontains=qsearch)
-            queryset = queryset_status.filter(Q(q_short_des | q_des | q_id))
+            q_license = Q(trailer_license__icontains=qsearch)
+            queryset = queryset_status.filter(Q(q_short_des | q_des | q_id) | q_license)
             return queryset
 
         elif qsearch and dsearch:
             print('Getting search for Both Q and Department')
             queryset = queryset_status.filter(
                 Q(Q(trailer_short_name__icontains=qsearch) |
-                  Q(trailer_description__icontains=qsearch)) &
+                  Q(trailer_description__icontains=qsearch) |
+                  Q(trailer_license__icontains=qsearch)) &
                 Q(trailer_department=dsearch))
             return queryset
         else:

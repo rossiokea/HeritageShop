@@ -284,7 +284,8 @@ class SearchListVehiclesView(ListView):
             q_assigned = Q(assigned_employee__icontains=qsearch)
             q_des = Q(vehicle_description__icontains=qsearch)
             q_id = Q(vehicle_identifier__icontains=qsearch)
-            queryset = queryset_status.filter(Q(q_short_des | q_assigned | q_des | q_id))
+            q_license = Q(vehicle_license__icontains=qsearch)
+            queryset = queryset_status.filter(Q(q_short_des | q_assigned | q_des | q_id | q_license))
 
             return queryset
 
@@ -293,7 +294,8 @@ class SearchListVehiclesView(ListView):
             queryset = queryset_status.filter(
                 Q(Q(vehicle_short_name__icontains=qsearch) |
                   Q(assigned_employee__icontains=qsearch) |
-                  Q(vehicle_description__icontains=qsearch)) &
+                  Q(vehicle_description__icontains=qsearch) |
+                  Q(vehicle_license__icontains=qsearch)) &
                 Q(vehicle_department=dsearch))
             return queryset
         else:
@@ -791,14 +793,14 @@ def AllDotTasksListView(request):
 
     # Combine all Objects into one List
     required_dot_tasks = sorted(chain(vehicles, trailers), key=operator.attrgetter('this_next_dot'),
-                              reverse=False)
+                                reverse=False)
 
     # Set up The Pagination
     paginated_dot_tasks = Paginator(required_dot_tasks, 15)
     page_number = request.GET.get('page')
     dot_tasks_page_obj = paginated_dot_tasks.get_page(page_number)
 
-        # End Pagination Set up
+    # End Pagination Set up
     # Add the paginated info to context dictionary
     context_mod = dict(required_dot_tasks=dot_tasks_page_obj)
 
