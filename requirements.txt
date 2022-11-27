@@ -4,13 +4,6 @@ defusedxml==0.7.1
 diff-match-patch==20200713
 Django==4.1.2
 django-active-link==0.1.8
-(.venv) Heritage_Site> pip freeze
-asgiref==3.5.2
-crispy-bootstrap5==0.7
-defusedxml==0.7.1
-diff-match-patch==20200713
-Django==4.1.2
-django-active-link==0.1.8
 django-crispy-forms==1.14.0
 django-filter==22.1
 django-import-export==3.0.1
