@@ -38,10 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'shop.apps.ShopConfig',
     'crispy_forms',
+    'crispy_bootstrap5',
     'django_filters',
     'active_link',
     'import_export',
     'whitenoise.runserver_nostatic',
+
 
 ]
 
@@ -75,6 +77,10 @@ TEMPLATES = [
         },
     },
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
 
 WSGI_APPLICATION = 'Heritage_Site.wsgi.application'
 

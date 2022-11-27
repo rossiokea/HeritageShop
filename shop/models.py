@@ -4,6 +4,10 @@ from django.db import models
 
 IS_ACTIVE = [(True, 'Active'), (False, 'Inactive')]
 DOT_STATUS = [(True, 'Passed'), (False, 'Failed')]
+ASSIGNED_DEPARTMENT = [('', 'Select One'),
+                       (10, 'Construction'),
+                       (20, 'Maintenance'),
+                       (50, 'Admin')]
 
 
 # Create your models here.
@@ -12,9 +16,9 @@ class Trailer(models.Model):
     trailer_license = models.CharField(max_length=7)
     trailer_vin = models.CharField(max_length=17)
     trailer_identifier = models.IntegerField()
-    trailer_department = models.IntegerField(blank=True, null=True)
-    trailer_short_name = models.CharField(max_length=20, blank=True, null=True)
-    trailer_description = models.CharField(max_length=50, blank=True, null=True)
+    trailer_department = models.IntegerField(choices=ASSIGNED_DEPARTMENT, blank=True, null=True)
+    trailer_short_name = models.CharField(max_length=30, blank=True, null=True)
+    trailer_description = models.CharField(max_length=60, blank=True, null=True)
     # Service Attributes
     trailer_service_period = models.IntegerField(blank=True, null=True)
     trailer_last_service = models.DateField(blank=True, null=True)
@@ -36,9 +40,9 @@ class Vehicle(models.Model):
     vehicle_license = models.CharField(max_length=10)
     vehicle_vin = models.CharField(max_length=20)
     vehicle_identifier = models.IntegerField()
-    vehicle_department = models.IntegerField(blank=True, null=True)
-    vehicle_short_name = models.CharField(max_length=20, blank=True, null=True)
-    vehicle_description = models.CharField(max_length=50, blank=True, null=True)
+    vehicle_department = models.IntegerField(choices=ASSIGNED_DEPARTMENT, blank=True, null=True)
+    vehicle_short_name = models.CharField(max_length=30, blank=True, null=True)
+    vehicle_description = models.CharField(max_length=60, blank=True, null=True)
     vehicle_status = models.BooleanField(choices=IS_ACTIVE, default=True, blank=True)
 
     # End Required Fields
@@ -65,7 +69,7 @@ class VehicleServiceRecord(models.Model):
     # vehicle_id = models.IntegerField()
     service_date = models.DateField(blank=True, null=True)
     service_miles = models.IntegerField(blank=True, null=True)
-    service_notes = models.TextField(max_length=200, blank=True, null=True)
+    service_notes = models.TextField(max_length=250, blank=True, null=True)
     vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
 
 
@@ -73,7 +77,7 @@ class VehicleRepairRecord(models.Model):
     # vehicle_id = models.IntegerField()
     repair_date = models.DateField(blank=True, null=True)
     repair_miles = models.IntegerField(blank=True, null=True)
-    repair_notes = models.TextField(max_length=200, blank=True, null=True)
+    repair_notes = models.TextField(max_length=250, blank=True, null=True)
     vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
 
 
@@ -81,7 +85,7 @@ class VehicleDotRecord(models.Model):
     # vehicle_id = models.IntegerField()
     dot_inspection_date = models.DateField()
     dot_miles = models.IntegerField(blank=True, null=True)
-    dot_repair_notes = models.TextField(max_length=200, blank=True, null=True)
+    dot_repair_notes = models.TextField(max_length=250, blank=True, null=True)
     dot_passed_inspection = models.BooleanField(choices=DOT_STATUS, default=True)
     vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
 
@@ -98,13 +102,13 @@ class VehicleDotRecord(models.Model):
 
 class TrailerServiceRecord(models.Model):
     trailer_service_date = models.DateField(blank=True, null=True)
-    trailer_service_notes = models.TextField(max_length=200, blank=True, null=True)
+    trailer_service_notes = models.TextField(max_length=250, blank=True, null=True)
     trailer = models.ForeignKey(Trailer, on_delete=models.CASCADE)
 
 
 class TrailerRepairRecord(models.Model):
     trailer_repair_date = models.DateField(blank=True, null=True)
-    trailer_repair_notes = models.TextField(max_length=200, blank=True, null=True)
+    trailer_repair_notes = models.TextField(max_length=250, blank=True, null=True)
     trailer = models.ForeignKey(Trailer, on_delete=models.CASCADE)
 
 
@@ -131,9 +135,9 @@ class Equipment(models.Model):
     equipment_id = models.AutoField(primary_key=True, editable=False, blank=True)
     equipment_vin = models.CharField(max_length=17, blank=True, null=True)
     equipment_identifier = models.IntegerField()
-    equipment_department = models.IntegerField(blank=True, null=True)
-    equipment_short_name = models.CharField(max_length=20, blank=True, null=True)
-    equipment_description = models.CharField(max_length=50, blank=True, null=True)
+    equipment_department = models.IntegerField(choices=ASSIGNED_DEPARTMENT, blank=True, null=True)
+    equipment_short_name = models.CharField(max_length=30, blank=True, null=True)
+    equipment_description = models.CharField(max_length=60, blank=True, null=True)
     # End Required Fields
 
     # Assignements
@@ -166,7 +170,7 @@ class EquipmentServiceRecord(models.Model):
     equipment_service_date = models.DateField(blank=True, null=True)
     equipment_service_hours = models.IntegerField(blank=True, null=True)
     equipment_next_service_hours = models.IntegerField(blank=True, null=True)
-    equipment_service_notes = models.TextField(max_length=200, blank=True, null=True)
+    equipment_service_notes = models.TextField(max_length=250, blank=True, null=True)
     equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE)
 
 
@@ -174,7 +178,7 @@ class EquipmentRepairRecord(models.Model):
     # vehicle_id = models.IntegerField()
     equipment_repair_date = models.DateField(blank=True, null=True)
     equipment_repair_miles = models.IntegerField(blank=True, null=True)
-    equipment_repair_notes = models.TextField(max_length=200, blank=True, null=True)
+    equipment_repair_notes = models.TextField(max_length=250, blank=True, null=True)
     equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE)
 
 

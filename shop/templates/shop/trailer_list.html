@@ -6,11 +6,15 @@
             <div class="row border border-2 border-dark kr_background_search rounded">
                 <!-- Start Search Section-->
                 <div class="row align-self-center">
-                    <div class="col-md-2">
+                    <div class="col-md-1">
                         <img src="{% static 'trailer.png' %}" alt="" width="60" height="60">
                     </div>
-                    <div class="col-md-4 justify-content-left d-flex align-items-center search_heading"> {{ object_list.count }}
+                    <div class="col-md-3  justify-content-center d-flex align-items-center search_heading"> {{ object_list.count }}
                         Trailers found
+                    </div>
+
+                    <div class="col-md-2  justify-content-center d-flex align-items-center search_heading"><span
+                            class="fs-5"> {{ trailers_page_obj }} </span>
                     </div>
                     <div class=" col-md-6">
                         <div class="row">

@@ -583,13 +583,13 @@ class DotRecordCreateView(CreateView):
         # Update the dates for DOT stuff
         try:
             # Calculate the next DOT inspection date
-            dot_period = 12
-            print(f"Dot type is {type(dot_period)}")
-            if dot_period is None:
-                print(f"I found dot_period is none {dot_period}")
-                service_period = 12
+            # dot_period = 12
+            # print(f"Dot type is {type(dot_period)}")
+            # if dot_period is None:
+            #     print(f"I found dot_period is none {dot_period}")
+            #     service_period = 12
 
-            next_dot = date + timedelta(weeks=(dot_period * 4))
+            next_dot = date + timedelta(weeks=(52))
 
             print(next_dot)
             vehicle.next_dot = next_dot

@@ -47,8 +47,8 @@
                         <div class="kr_text_info_heading">Service Info:</div>
                         <div class="">
                             <div class="row">
-                                <div class="col-4 text-muted">Service Period:</div>
-                                <div class="col-8 text-dark text-align-left"> {{ vehicle.service_period }}</div>
+                                <div class="col-6 text-muted">Service Period (mos):</div>
+                                <div class="col-6 text-dark text-align-left"> {{ vehicle.service_period }}</div>
                             </div>
                             <div class="row">
                                 <div class="col-4 text-muted">Last Service:</div>
@@ -80,7 +80,7 @@
                         <div class="">
                             <div class="row">
                                 <div class="col-4 text-muted">Assigned Dept:</div>
-                                <div class="col-8 text-dark text-align-left">{{ vehicle.vehicle_department }}</div>
+                                <div class="col-8 text-dark text-align-left">{{ vehicle.get_vehicle_department_display }}</div>
                             </div>
                             <div class="row">
                                 <div class="col-4 text-muted">Assigned Emp:</div>

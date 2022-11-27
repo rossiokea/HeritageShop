@@ -6,12 +6,16 @@
             <div class="row border border-2 border-dark kr_background_search rounded">
                 <!-- Start Search Section-->
                 <div class="row ">
-                    <div class="col-md-2">
+                    <div class="col-md-1">
                         <img src="{% static 'dump-truck.png' %}" alt="" width="60" height="60">
                     </div>
 
-                    <div class="col-md-4  justify-content-start d-flex align-items-center search_heading"> {{ object_list.count }}
-                        Vehicles found {{ vehicles_page_obj }}
+                    <div class="col-md-3  justify-content-center d-flex align-items-center search_heading"> {{ object_list.count }}
+                        Vehicles found
+                    </div>
+
+                    <div class="col-md-2  justify-content-center d-flex align-items-center search_heading"><span
+                            class="fs-5"> {{ vehicles_page_obj }} </span>
                     </div>
 
                     <div class="col-md-6 ">
