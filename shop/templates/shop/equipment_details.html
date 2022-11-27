@@ -27,8 +27,12 @@
                             <div class="col-8 text-dark text-align-left">{{ equipment.equipment_short_name }}</div>
                         </div>
                         <div class="row">
-                            <div class="text-muted mb-2">Description:</div>
+                            <div class="col-4 text-muted">Description:</div>
                             <div class="col-8 text-dark text-align-left">{{ equipment.equipment_description }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 text-muted">Status:</div>
+                            <div class="col-8 text-dark text-align-left">{{ equipment.get_equipment_status_display}}</div>
                         </div>
                     </div>
                 </div>
@@ -39,23 +43,23 @@
                         <div class="kr_text_info_heading">Service Info:</div>
                         <div class="">
                             <div class="row">
-                                <div class="col-5 text-muted">Service Period (HR): </div>
+                                <div class="col-5 text-muted">Service Period (HR):</div>
                                 <div class="col-7 text-dark text-align-left"> {{ equipment.equipment_service_period }} </div>
                             </div>
                             <div class="row">
-                                <div class="col-5 text-muted">Last Service:</div>
+                                <div class="col-5 text-muted">Last Service (HR):</div>
                                 <div class="col-7 text-dark text-align-left"> {{ equipment.equipment_last_service_hours }}</div>
                             </div>
                             <div class="row">
-                                <div class="col-5 text-muted">Next Service:</div>
+                                <div class="col-5 text-muted">Next Service (HR):</div>
                                 <div class="col-7 text-dark text-align-left">{{ equipment.equipment_next_service_hours }}</div>
                             </div>
                             <div class="row">
-                                <div class="col-5 text-muted">Last Service:</div>
+                                <div class="col-5 text-muted">Last Service (Date):</div>
                                 <div class="col-7 text-dark text-align-left">{{ equipment.equipment_last_service }}</div>
                             </div>
                             <div class="row">
-                                <div class="col-5 text-muted">Next Service:</div>
+                                <div class="col-5 text-muted">Next Service (Date):</div>
                                 <div class="col-7 fw-bold text-dark text-align-left">{{ equipment.equipment_next_service }}</div>
                             </div>
                         </div>
@@ -71,7 +75,7 @@
                         <div class="">
                             <div class="row">
                                 <div class="col-4 text-muted">Assigned Dept:</div>
-                                <div class="col-8 text-dark text-align-left">{{ equipment.equipment_department }}</div>
+                                <div class="col-8 text-dark text-align-left">{{ equipment.get_equipment_department_display}}</div>
                             </div>
                             <div class="row">
                                 <div class="col-4 text-muted">Assigned User:</div>
