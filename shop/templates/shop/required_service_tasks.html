@@ -18,7 +18,7 @@
             </tr>
             <tbody>
             {% for item in required_service %}
-                <tr>
+                <tr >
                     {% if item.this_type == 'vehicle' %}
                         {% if item.this_service_date <= today %}
                             <td style="background-color: red"><a
@@ -68,7 +68,7 @@
                     <td>{{ item.this_identifier }}</td>
                     <td>{{ item.this_short_description }}</td>
                     <td>{{ item.this_description }}</td>
-                    <td>{{ item.this_service_date }}</td>
+                    <td style="width:15ch" >{{ item.this_service_date }}</td>
                 </tr>
             {% endfor %}
             </tbody>
