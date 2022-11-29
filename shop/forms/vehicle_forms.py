@@ -117,9 +117,14 @@ class UpdateVehicleForm2(forms.ModelForm):
         self.fields['next_service'].widget.attrs['class'] = 'form-control'
         self.fields['next_service'].widget.attrs['style'] = 'width:16ch'
 
+        self.fields['next_service_miles'].label = 'Next Service Miles'
+        self.fields['next_service_miles'].widget.attrs['class'] = 'form-control'
+        self.fields['next_service_miles'].widget.attrs['style'] = 'width:16ch'
+
     class Meta:
         model = Vehicle
-        fields = ['vehicle_identifier', 'service_period', 'last_service', 'last_service_miles', 'next_service']
+        fields = ['vehicle_identifier', 'service_period', 'last_service', 'last_service_miles', 'next_service',
+                  'next_service_miles']
         # fields = ['service_period', 'last_service', 'last_service_miles',
         #        'next_service']
 
@@ -329,4 +334,3 @@ class DotRecordUpdateForm(forms.ModelForm):
         model = VehicleDotRecord
         fields = ['dot_inspection_date', 'dot_miles', 'dot_repair_notes', 'dot_passed_inspection']
         widgets = {'dot_inspection_date': DateInput()}
-
