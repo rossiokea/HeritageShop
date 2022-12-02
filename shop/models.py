@@ -55,6 +55,7 @@ class Vehicle(models.Model):
     last_service_miles = models.IntegerField(blank=True, null=True)
     next_service = models.DateField(blank=True, null=True)
     next_service_miles = models.IntegerField(blank=True, null=True)
+    # weekly_hours = models.IntegerField(blank=True, null=True)
 
     # DOT Attributes
     last_dot = models.DateField(blank=True, null=True)

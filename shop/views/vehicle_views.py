@@ -713,9 +713,9 @@ def AllServiceTasksListView(request):
     today_20 = datetime.date.today() + timedelta(14)
 
     # Get all the Objects that could require Servicing
-    vehicles = Vehicle.objects.all().filter(next_service__lte=today_20)
-    trailers = Trailer.objects.all().filter(trailer_next_service__lte=today_20)
-    equipments = Equipment.objects.all().filter(equipment_next_service__lte=today_20)
+    vehicles = Vehicle.objects.all().filter(next_service__lte=today_20) & Vehicle.objects.all().filter(vehicle_status__exact=True)
+    trailers = Trailer.objects.all().filter(trailer_next_service__lte=today_20) & Trailer.objects.all().filter(trailer_status=True)
+    equipments = Equipment.objects.all().filter(equipment_next_service__lte=today_20) & Equipment.objects.all().filter(equipment_status=True)
     print(equipments)
     # Add the properties that will be displayed in the results since they are to a specific model
     # We need to generalize them ex vehicle_short_name will be this_short_name
