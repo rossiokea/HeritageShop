@@ -10,7 +10,7 @@ from django.template import context
 from django.urls import reverse_lazy
 from django.db.models import Q, F
 
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import View, ListView, DetailView, CreateView, UpdateView, DeleteView
 
 import shop.forms.vehicle_forms
 # from shop.models import Vehicle, Trailer, Equipment, \
@@ -207,11 +207,11 @@ class VehicleUpdate2(UpdateView):
         obj = Vehicle.objects.get(vehicle_id=self.kwargs['pk'])
         return obj
 
-
-class VehicleUpdate3(UpdateView):
-    form_class = shop.forms.vehicle_forms.UpdateVehicleForm3
-    template_name = 'shop/vehicle_update_form.html'
-    pk_url_kwarg = Vehicle.vehicle_id
+    # This View has been moved to the MainSection
+    # class VehicleUpdate3(UpdateView):
+    #     form_class = shop.forms.vehicle_forms.UpdateVehicleForm3
+    #     template_name = 'shop/vehicle_update_form.html'
+    #     pk_url_kwarg = Vehicle.vehicle_id
 
     # success_url = reverse_lazy('shop:list_vehicles')
 
@@ -713,9 +713,12 @@ def AllServiceTasksListView(request):
     today_20 = datetime.date.today() + timedelta(14)
 
     # Get all the Objects that could require Servicing
-    vehicles = Vehicle.objects.all().filter(next_service__lte=today_20) & Vehicle.objects.all().filter(vehicle_status__exact=True)
-    trailers = Trailer.objects.all().filter(trailer_next_service__lte=today_20) & Trailer.objects.all().filter(trailer_status=True)
-    equipments = Equipment.objects.all().filter(equipment_next_service__lte=today_20) & Equipment.objects.all().filter(equipment_status=True)
+    vehicles = Vehicle.objects.all().filter(next_service__lte=today_20) & Vehicle.objects.all().filter(
+        vehicle_status__exact=True)
+    trailers = Trailer.objects.all().filter(trailer_next_service__lte=today_20) & Trailer.objects.all().filter(
+        trailer_status=True)
+    equipments = Equipment.objects.all().filter(equipment_next_service__lte=today_20) & Equipment.objects.all().filter(
+        equipment_status=True)
     print(equipments)
     # Add the properties that will be displayed in the results since they are to a specific model
     # We need to generalize them ex vehicle_short_name will be this_short_name
@@ -815,3 +818,22 @@ def AllDotTasksListView(request):
     context_mod['today_20'] = today_20
 
     return render(request, "shop/required_dot_tasks.html", context=context_mod)
+
+
+class WeeklyCheckView(View):
+    def get(self, request):
+        # Query for the vehicles that are tracked weekly, Also Paginate at the same time with 15 items per page
+        weekly_vehicles = Paginator(Vehicle.objects.all().filter(track_weekly_miles=True), 15)
+
+        # Complete the Pagination process
+        page_number = request.GET.get('page')
+        weekly_tasks_page_obj = weekly_vehicles.get_page(page_number)
+
+        #Create and Add the info to the Context
+
+        #context_mod = dict(required_dot_tasks=dot_tasks_page_obj)
+        context_mod = dict(weekly_tasks = weekly_tasks_page_obj)
+
+        # Return to the view template
+        return render(request, 'shop/required_weekly_service_tasks.html', context=context_mod)
+        pass

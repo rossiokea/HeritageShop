@@ -36,372 +36,371 @@
                             <div class="col-8 text-dark text-align-left ">{{ trailer.trailer_description }}</div>
                         </div>
                         <div class="row">
-                            <div class="col-4 text-muted"
-                            ">Status:
-                        </div>
-                        <div class="col-8 text-dark text-align-left ">{{ trailer.get_trailer_status_display }}</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="wrap card text-left kr_border_container1 m-2 p-2 rounded">
-                <a href="{% url 'shop:trailer_update2' pk=trailer.pk %}"></a>
-                <div class="text-left">
-                    <div class="kr_text_info_heading">Service Info:</div>
-                    <div class="">
-                        <div class="row">
-                            <div class="col-4 text-muted">Service Period:</div>
-                            <div class="col-8 text-dark text-align-left">{{ trailer.trailer_service_period }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4 text-muted">Last Service:</div>
-                            <div class="col-8 text-dark text-align-left">{{ trailer.trailer_last_service }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4 text-muted">Next Service:</div>
-                            <div class="col-8 fw-bold text-dark text-align-left">{{ trailer.trailer_next_service }}</div>
-                        </div>
-
-                    </div>
-                </div>
-                <div>
-                </div>
-            </div>
-            <!-- Start General Info Card Section -->
-            <div class="card wrap text-left kr_border_container1 m-2 p-2 rounded">
-                <a href="{% url 'shop:trailer_update3' pk=trailer.pk %}"></a>
-                <div class="text-left">
-                    <div class="kr_text_info_heading">General Info:</div>
-                    <div class="">
-                        <div class="row">
-                            <div class="col-4 text-muted">Assigned Dept: </div>
+                            <div class="col-4 text-muted">Assigned Dept:</div>
                             <div class="col-8 text-dark text-align-left">{{ trailer.get_trailer_department_display }}</div>
                         </div>
-                        <!--
-
-                        -->
-
-                    </div>
-                </div>
-            </div>
-            <!-- End General Info Card Section-->
-            <!-- Start DOT Info Card Section -->
-            <div class="card wrap text-left kr_border_container1 m-2 p-2 rounded">
-                <a href="{% url 'shop:trailer_update4' pk=trailer.pk %}"></a>
-                <div class="text-left">
-                    <div class="kr_text_info_heading">DOT Inspections:</div>
-                    <div class="">
                         <div class="row">
-                            <div class="col-4 text-muted">Last DOT:</div>
-                            <div class="col-8 text-dark text-align-left">{{ trailer.trailer_last_dot }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4 text-muted">Next DOT:</div>
-                            <div class="col-8 text-dark text-align-left">{{ trailer.trailer_next_dot }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4 text-muted">DOT Status:</div>
-                            <div class="col-8 text-dark text-align-left">{{ trailer.get_trailer_last_dot_status_display }}</div>
+                            <div class="col-4 text-muted">Status:</div>
+                            <div class="col-8 text-dark text-align-left ">{{ trailer.get_trailer_status_display }}</div>
                         </div>
                     </div>
                 </div>
+
+                <div class="wrap card text-left kr_border_container1 m-2 p-2 rounded">
+                    <a href="{% url 'shop:trailer_update2' pk=trailer.pk %}"></a>
+                    <div class="text-left">
+                        <div class="kr_text_info_heading">Service Info:</div>
+                        <div class="">
+                            <div class="row">
+                                <div class="col-4 text-muted">Service Period:</div>
+                                <div class="col-8 text-dark text-align-left">{{ trailer.trailer_service_period }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-muted">Last Service:</div>
+                                <div class="col-8 text-dark text-align-left">{{ trailer.trailer_last_service }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-muted">Next Service:</div>
+                                <div class="col-8 fw-bold text-dark text-align-left">{{ trailer.trailer_next_service }}</div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div>
+                    </div>
+                </div>
+                <!-- Start General Info Card Section -->
+                {#     Move to the Details Section above           #}
+                {#                <div class="card wrap text-left kr_border_container1 m-2 p-2 rounded">#}
+                {#                    <a href="{% url 'shop:trailer_update3' pk=trailer.pk %}"></a>#}
+                {#                    <div class="text-left">#}
+                {#                        <div class="kr_text_info_heading">General Info:</div>#}
+                {#                        <div class="">#}
+                {#                            <div class="row">#}
+                {#                                <div class="col-4 text-muted">Assigned Dept:</div>#}
+                {#                                <div class="col-8 text-dark text-align-left">{{ trailer.get_trailer_department_display }}</div>#}
+                {#                            </div>#}
+                {#                        </div>#}
+                {#                    </div>#}
+                {#                </div>#}
+                <!-- End General Info Card Section-->
+                <!-- Start DOT Info Card Section -->
+                <div class="card wrap text-left kr_border_container1 m-2 p-2 rounded">
+                    <a href="{% url 'shop:trailer_update4' pk=trailer.pk %}"></a>
+                    <div class="text-left">
+                        <div class="kr_text_info_heading">DOT Inspections:</div>
+                        <div class="">
+                            <div class="row">
+                                <div class="col-4 text-muted">Last DOT:</div>
+                                <div class="col-8 text-dark text-align-left">{{ trailer.trailer_last_dot }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-muted">Next DOT:</div>
+                                <div class="col-8 text-dark text-align-left">{{ trailer.trailer_next_dot }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-muted">DOT Status:</div>
+                                <div class="col-8 text-dark text-align-left">{{ trailer.get_trailer_last_dot_status_display }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End DOT Card Section-->
             </div>
-            <!-- End DOT Card Section-->
-        </div>
-        <!-- End  of Vehicle Details -->
+            <!-- End  of Vehicle Details -->
 
-
-        <!-- ######### -->
-        <!-- Start of Record Pills -->
-        <!-- ######### -->
-        <div class="col-md-6 col-lg-8 affectedDiv">
-            <!-- Tabs navs -->
-            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-service-tab" data-bs-toggle="pill"
-                            data-bs-target="#pills-service"
-                            type="button" role="tab" aria-controls="pills-service" aria-selected="true">Trailer
-                        Service
-                        Records
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-repair-tab" data-bs-toggle="pill"
-                            data-bs-target="#pills-repair"
-                            type="button" role="tab" aria-controls="pills-repair" aria-selected="false">Trailer
-                        Repair
-                        Records
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-dot-tab" data-bs-toggle="pill"
-                            data-bs-target="#pills-dot"
-                            type="button" role="tab" aria-controls="pills-dot" aria-selected="false">Trailer DOT
-                        Records
-                    </button>
-                </li>
-            </ul>
 
             <!-- ######### -->
-            <!--Start Service Records Area -->
-            <!--########## -->
-
-            <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show" id="pills-service" role="tabpanel"
-                     aria-labelledby="pills-service-tab"
-                     tabindex="0" style="background-color: rgba(49, 117, 51, 0.26)">
-                    <!-- This is  the end of the Navigation section -->
-
-                    <div class="bg-info flex">
-                        <div>
-                            <a href="{% url 'shop:trailer_service_record_create' pk=trailer.pk tid=trailer.trailer_identifier %}"
-                               class="btn btn-secondary float-right mt-2 mb-2" style="float:right"
-                               role="button"
-                               aria-disabled="true">Add Service Record</a>
-                        </div>
-                    </div>
-                    <table class="table table-striped table-bordered table-hover kr_table kr_background">
-                        <colgroup>
-                            <col class="w-15">
-                            <col class="w-50">
-                            <col class="w-10">
-                        </colgroup>
-                        <thead>
-                        <tr>
-                            <th class="text-center">Service Date</th>
-                            <th class="text-center">Service Notes</th>
-                            <th class="text-center">Actions</th>
-
-
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for record in service_records_page_obj %}
-                            <tr>
-                                <td class="text-center"> {{ record.trailer_service_date }} </td>
-                                <td class="text-center">{{ record.trailer_service_notes }}</td>
-
-                                <td class="text-center">
-                                    <a class="btn btn-secondary btn-sm" title="Edit Repair Record"
-                                       href="{% url 'shop:trailer_service_record_update' id=record.id pk=trailer.pk tid=trailer.trailer_identifier %}"><img
-                                            class="img-fluid" src="{% static "icons8-edit-property-48.png" %}"
-                                            alt="Update" width="25" height="25"></a>
-
-                                    <a class="btn btn-secondary btn-sm" title="Delete Repair Record"
-                                       href="{% url 'shop:trailer_service_record_delete' id=record.id pk=trailer.pk tid=trailer.trailer_identifier %}"><img
-                                            class="img-responsive" src="{% static "icons8-remove-48.png" %}"
-                                            alt="Delete" width="25" height="25"></a>
-                                </td>
-
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                    <!--Start Vehicle Service Table Pagination -->
-                    <nav aria-label="..." class="text-center">
-                        <div>
-                            {% if service_records_page_obj.has_previous %}
-                                <a class="btn btn-outline-success mb-4" href="?page=1">First</a>
-                                <a class="btn btn-outline-success mb-4"
-                                   href="?page={{ service_records_page_obj.previous_page_number }}">Previous</a>
-                            {% endif %}
-
-                            {% for num in service_records_page_obj.paginator.page_range %}
-                                {% if service_records_page_obj.number == num %}
-                                    <a class="btn btn-success mb-4" href="?page={{ num }}">{{ num }}</a>
-                                {% elif num > service_records_page_obj.number|add:'-3' and num < service_records_page_obj.number|add:'3' %}
-                                    <a class="btn btn-outline-success mb-4" href="?page={{ num }}">{{ num }}</a>
-                                {% endif %}
-                            {% endfor %}
-
-                            {% if service_records_page_obj.has_next %}
-                                <a class="btn btn-outline-success mb-4"
-                                   href="?page={{ service_records_page_obj.next_page_number }}">Next</a>
-                                <a class="btn btn-outline-success mb-4"
-                                   href="?page={{ service_records_page_obj.paginator.num_pages }}">Last</a>
-                            {% endif %}
-                        </div>
-                        <!-- End Service Record Pagination -->
-                    </nav>
-
-                    <!-- ######### -->
-                    <!--Start Repair Records Area -->
-                    <!--########## -->
-                </div>
-
-                <div class="tab-pane fade" id="pills-repair" role="tabpanel" aria-labelledby="pills-repair-tab"
-                     tabindex="0" style="background-color: rgba(49, 117, 51, 0.26)">
-
-                    <div>
-                        <div>
-                            <a href="{% url 'shop:trailer_repair_record_create' pk=trailer.pk tid=trailer.trailer_identifier %}"
-                               class="btn btn-secondary float-right mt-2 mb-2" style="float:right"
-                               role="button"
-                               aria-disabled="true">Add Repair Record</a>
-                        </div>
-                    </div>
-                    <table class="table table-striped table-bordered table-hover kr_table kr_background">
-                        <colgroup>
-                            <col class="w-15">
-                            <col class="w-50">
-                            <col class="w-10">
-                        </colgroup>
-                        <thead>
-                        <tr>
-                            <th class="text-center">Repair Date</th>
-                            <th class="text-center">Repiar Notes</th>
-                            <th class="text-center">Actions</th>
-
-
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for record in repair_records_page_obj %}
-                            <tr>
-                                <td class="text-center"> {{ record.trailer_repair_date }} </td>
-                                <td class="text-center">{{ record.trailer_repair_notes }}</td>
-                                <td class="text-center">
-                                    <a class="btn btn-secondary btn-sm" title="Edit Repair Record"
-                                       href="{% url 'shop:trailer_repair_record_update' id=record.id pk=trailer.pk tid=trailer.trailer_identifier %}"><img
-                                            class="img-fluid" src="{% static "icons8-edit-property-48.png" %}"
-                                            alt="Update" width="25" height="25"></a>
-
-                                    <a class="btn btn-secondary btn-sm" title="Delete Repair Record"
-                                       href="{% url 'shop:trailer_repair_record_delete' id=record.id pk=trailer.pk tid=trailer.trailer_identifier %}"><img
-                                            class="img-responsive" src="{% static "icons8-remove-48.png" %}"
-                                            alt="Delete" width="25" height="25"></a>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                    <!--Start Vehicle Table Pagination -->
-                    <nav aria-label="..." class="text-center">
-                        <div>
-                            {% if repair_records_page_obj.has_previous %}
-                                <a class="btn btn-outline-success mb-4" href="?page=1">First</a>
-                                <a class="btn btn-outline-success mb-4"
-                                   href="?page={{ repair_records_page_obj.previous_page_number }}">Previous</a>
-                            {% endif %}
-
-                            {% for num in repair_records_page_obj.paginator.page_range %}
-                                {% if repair_records_page_obj.number == num %}
-                                    <a class="btn btn-success mb-4" href="?page={{ num }}">{{ num }}</a>
-                                {% elif num > repair_records_page_obj.number|add:'-3' and num < repair_records_page_obj.number|add:'3' %}
-                                    <a class="btn btn-outline-success mb-4" href="?page={{ num }}">{{ num }}</a>
-                                {% endif %}
-                            {% endfor %}
-
-                            {% if repair_records_page_obj.has_next %}
-                                <a class="btn btn-outline-success mb-4"
-                                   href="?page={{ repair_records_page_obj.next_page_number }}">Next</a>
-                                <a class="btn btn-outline-success mb-4"
-                                   href="?page={{ repair_records_page_obj.paginator.num_pages }}">Last</a>
-                            {% endif %}
-                        </div>
-                    </nav>
-                    <!--End Vehicle Table Pagination -->
-                </div>
+            <!-- Start of Record Pills -->
+            <!-- ######### -->
+            <div class="col-md-6 col-lg-8 affectedDiv">
+                <!-- Tabs navs -->
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-service-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-service"
+                                type="button" role="tab" aria-controls="pills-service" aria-selected="true">Trailer
+                            Service
+                            Records
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-repair-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-repair"
+                                type="button" role="tab" aria-controls="pills-repair" aria-selected="false">Trailer
+                            Repair
+                            Records
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-dot-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-dot"
+                                type="button" role="tab" aria-controls="pills-dot" aria-selected="false">Trailer DOT
+                            Records
+                        </button>
+                    </li>
+                </ul>
 
                 <!-- ######### -->
-                <!--Start Dot Records Area -->
+                <!--Start Service Records Area -->
                 <!--########## -->
 
-                <div class="tab-pane fade" id="pills-dot" role="tabpanel" aria-labelledby="pills-dot-tab"
-                     tabindex="0" style="background-color: rgba(49, 117, 51, 0.26)">
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show" id="pills-service" role="tabpanel"
+                         aria-labelledby="pills-service-tab"
+                         tabindex="0" style="background-color: rgba(49, 117, 51, 0.26)">
+                        <!-- This is  the end of the Navigation section -->
 
-                    <!-- This is  the Start of the DOT Navigation section -->
-
-                    <div class="bg-info flex">
-                        <div>
-                            <a href="{% url 'shop:trailer_dot_record_create' pk=trailer.pk tid=trailer.trailer_identifier %}"
-                               class="btn btn-secondary float-right mt-2 mb-2" style="float:right"
-                               role="button"
-                               aria-disabled="true">Add DOT Record</a>
+                        <div class="bg-info flex">
+                            <div>
+                                <a href="{% url 'shop:trailer_service_record_create' pk=trailer.pk tid=trailer.trailer_identifier %}"
+                                   class="btn btn-secondary float-right mt-2 mb-2" style="float:right"
+                                   role="button"
+                                   aria-disabled="true">Add Service Record</a>
+                            </div>
                         </div>
-                    </div>
-                    <table class="table table-striped table-bordered table-hover kr_table kr_background">
-                        <colgroup>
-                            <col class="w-15">
-                            <col class="w-55">
-                            <col class="w-10">
-                            <col class="w-15">
-
-                        </colgroup>
-                        <thead>
-                        <tr>
-                            <th class="text-center">Date</th>
-                            <th class="text-center">Notes</th>
-                            <th class="text-center">Status</th>
-                            <th class="text-center">Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for record in dot_records_page_obj %}
-                            {{ record.dot }}
+                        <table class="table table-striped table-bordered table-hover kr_table kr_background">
+                            <colgroup>
+                                <col class="w-15">
+                                <col class="w-50">
+                                <col class="w-10">
+                            </colgroup>
+                            <thead>
                             <tr>
-                                <td class="text-center"> {{ record.trailer_dot_inspection_date }} </td>
-                                <td class="text-center">{{ record.trailer_dot_repair_notes }}</td>
-                                <td class="text-center">{{ record.get_trailer_dot_passed_inspection_display }}</td>
-                                <td class="text-center">
-                                    <a class="btn btn-secondary btn-sm" title="Edit Repair Record"
-                                       href="{% url 'shop:trailer_dot_record_update' id=record.id pk=trailer.pk tid=trailer.trailer_identifier %}"><img
-                                            class="img-fluid" src="{% static "icons8-edit-property-48.png" %}"
-                                            alt="Update" width="25" height="25"></a>
+                                <th class="text-center">Service Date</th>
+                                <th class="text-center">Service Notes</th>
+                                <th class="text-center">Actions</th>
 
-                                    <a class="btn btn-secondary btn-sm" title="Delete Repair Record"
-                                       href="{% url 'shop:trailer_dot_record_delete' id=record.id pk=trailer.pk tid=trailer.trailer_identifier %}"><img
-                                            class="img-responsive" src="{% static "icons8-remove-48.png" %}"
-                                            alt="Delete" width="25" height="25"></a>
-                                </td>
+
                             </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                    <!--Start Vehicle DOT Table Pagination -->
-                    <nav aria-label="..." class="text-center">
-                        <div>
-                            {% if dot_records_page_obj.has_previous %}
-                                <a class="btn btn-outline-success mb-4" href="?page=1">First</a>
-                                <a class="btn btn-outline-success mb-4"
-                                   href="?page={{ dot_records_page_obj.previous_page_number }}">Previous</a>
-                            {% endif %}
+                            </thead>
+                            <tbody>
+                            {% for record in service_records_page_obj %}
+                                <tr>
+                                    <td class="text-center"> {{ record.trailer_service_date }} </td>
+                                    <td class="text-center">{{ record.trailer_service_notes }}</td>
 
-                            {% for num in dot_records_page_obj.paginator.page_range %}
-                                {% if dot_records_page_obj.number == num %}
-                                    <a class="btn btn-success mb-4" href="?page={{ num }}">{{ num }}</a>
-                                {% elif num > dot_records_page_obj.number|add:'-3' and num < dot_records_page_obj.number|add:'3' %}
-                                    <a class="btn btn-outline-success mb-4" href="?page={{ num }}">{{ num }}</a>
-                                {% endif %}
+                                    <td class="text-center">
+                                        <a class="btn btn-secondary btn-sm" title="Edit Repair Record"
+                                           href="{% url 'shop:trailer_service_record_update' id=record.id pk=trailer.pk tid=trailer.trailer_identifier %}"><img
+                                                class="img-fluid" src="{% static "icons8-edit-property-48.png" %}"
+                                                alt="Update" width="25" height="25"></a>
+
+                                        <a class="btn btn-secondary btn-sm" title="Delete Repair Record"
+                                           href="{% url 'shop:trailer_service_record_delete' id=record.id pk=trailer.pk tid=trailer.trailer_identifier %}"><img
+                                                class="img-responsive" src="{% static "icons8-remove-48.png" %}"
+                                                alt="Delete" width="25" height="25"></a>
+                                    </td>
+
+                                </tr>
                             {% endfor %}
+                            </tbody>
+                        </table>
+                        <!--Start Vehicle Service Table Pagination -->
+                        <nav aria-label="..." class="text-center">
+                            <div>
+                                {% if service_records_page_obj.has_previous %}
+                                    <a class="btn btn-outline-success mb-4" href="?page=1">First</a>
+                                    <a class="btn btn-outline-success mb-4"
+                                       href="?page={{ service_records_page_obj.previous_page_number }}">Previous</a>
+                                {% endif %}
 
-                            {% if dot_records_page_obj.has_next %}
-                                <a class="btn btn-outline-success mb-4"
-                                   href="?page={{ dot_records_page_obj.next_page_number }}">Next</a>
-                                <a class="btn btn-outline-success mb-4"
-                                   href="?page={{ dot_records_page_obj.paginator.num_pages }}">Last</a>
-                            {% endif %}
+                                {% for num in service_records_page_obj.paginator.page_range %}
+                                    {% if service_records_page_obj.number == num %}
+                                        <a class="btn btn-success mb-4" href="?page={{ num }}">{{ num }}</a>
+                                    {% elif num > service_records_page_obj.number|add:'-3' and num < service_records_page_obj.number|add:'3' %}
+                                        <a class="btn btn-outline-success mb-4" href="?page={{ num }}">{{ num }}</a>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if service_records_page_obj.has_next %}
+                                    <a class="btn btn-outline-success mb-4"
+                                       href="?page={{ service_records_page_obj.next_page_number }}">Next</a>
+                                    <a class="btn btn-outline-success mb-4"
+                                       href="?page={{ service_records_page_obj.paginator.num_pages }}">Last</a>
+                                {% endif %}
+                            </div>
+                            <!-- End Service Record Pagination -->
+                        </nav>
+
+                        <!-- ######### -->
+                        <!--Start Repair Records Area -->
+                        <!--########## -->
+                    </div>
+
+                    <div class="tab-pane fade" id="pills-repair" role="tabpanel" aria-labelledby="pills-repair-tab"
+                         tabindex="0" style="background-color: rgba(49, 117, 51, 0.26)">
+
+                        <div>
+                            <div>
+                                <a href="{% url 'shop:trailer_repair_record_create' pk=trailer.pk tid=trailer.trailer_identifier %}"
+                                   class="btn btn-secondary float-right mt-2 mb-2" style="float:right"
+                                   role="button"
+                                   aria-disabled="true">Add Repair Record</a>
+                            </div>
                         </div>
-                        <!-- End Service Record Pagination -->
-                    </nav>
-                    <!-- ######### -->
-                    <!--End Repair Records Area -->
-                    <!--########## -->
+                        <table class="table table-striped table-bordered table-hover kr_table kr_background">
+                            <colgroup>
+                                <col class="w-15">
+                                <col class="w-50">
+                                <col class="w-10">
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th class="text-center">Repair Date</th>
+                                <th class="text-center">Repiar Notes</th>
+                                <th class="text-center">Actions</th>
 
 
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for record in repair_records_page_obj %}
+                                <tr>
+                                    <td class="text-center"> {{ record.trailer_repair_date }} </td>
+                                    <td class="text-center">{{ record.trailer_repair_notes }}</td>
+                                    <td class="text-center">
+                                        <a class="btn btn-secondary btn-sm" title="Edit Repair Record"
+                                           href="{% url 'shop:trailer_repair_record_update' id=record.id pk=trailer.pk tid=trailer.trailer_identifier %}"><img
+                                                class="img-fluid" src="{% static "icons8-edit-property-48.png" %}"
+                                                alt="Update" width="25" height="25"></a>
+
+                                        <a class="btn btn-secondary btn-sm" title="Delete Repair Record"
+                                           href="{% url 'shop:trailer_repair_record_delete' id=record.id pk=trailer.pk tid=trailer.trailer_identifier %}"><img
+                                                class="img-responsive" src="{% static "icons8-remove-48.png" %}"
+                                                alt="Delete" width="25" height="25"></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <!--Start Vehicle Table Pagination -->
+                        <nav aria-label="..." class="text-center">
+                            <div>
+                                {% if repair_records_page_obj.has_previous %}
+                                    <a class="btn btn-outline-success mb-4" href="?page=1">First</a>
+                                    <a class="btn btn-outline-success mb-4"
+                                       href="?page={{ repair_records_page_obj.previous_page_number }}">Previous</a>
+                                {% endif %}
+
+                                {% for num in repair_records_page_obj.paginator.page_range %}
+                                    {% if repair_records_page_obj.number == num %}
+                                        <a class="btn btn-success mb-4" href="?page={{ num }}">{{ num }}</a>
+                                    {% elif num > repair_records_page_obj.number|add:'-3' and num < repair_records_page_obj.number|add:'3' %}
+                                        <a class="btn btn-outline-success mb-4" href="?page={{ num }}">{{ num }}</a>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if repair_records_page_obj.has_next %}
+                                    <a class="btn btn-outline-success mb-4"
+                                       href="?page={{ repair_records_page_obj.next_page_number }}">Next</a>
+                                    <a class="btn btn-outline-success mb-4"
+                                       href="?page={{ repair_records_page_obj.paginator.num_pages }}">Last</a>
+                                {% endif %}
+                            </div>
+                        </nav>
+                        <!--End Vehicle Table Pagination -->
+                    </div>
+
                     <!-- ######### -->
-                    <!--Start Repair Records Area -->
+                    <!--Start Dot Records Area -->
                     <!--########## -->
+
+                    <div class="tab-pane fade" id="pills-dot" role="tabpanel" aria-labelledby="pills-dot-tab"
+                         tabindex="0" style="background-color: rgba(49, 117, 51, 0.26)">
+
+                        <!-- This is  the Start of the DOT Navigation section -->
+
+                        <div class="bg-info flex">
+                            <div>
+                                <a href="{% url 'shop:trailer_dot_record_create' pk=trailer.pk tid=trailer.trailer_identifier %}"
+                                   class="btn btn-secondary float-right mt-2 mb-2" style="float:right"
+                                   role="button"
+                                   aria-disabled="true">Add DOT Record</a>
+                            </div>
+                        </div>
+                        <table class="table table-striped table-bordered table-hover kr_table kr_background">
+                            <colgroup>
+                                <col class="w-15">
+                                <col class="w-55">
+                                <col class="w-10">
+                                <col class="w-15">
+
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th class="text-center">Date</th>
+                                <th class="text-center">Notes</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for record in dot_records_page_obj %}
+                                {{ record.dot }}
+                                <tr>
+                                    <td class="text-center"> {{ record.trailer_dot_inspection_date }} </td>
+                                    <td class="text-center">{{ record.trailer_dot_repair_notes }}</td>
+                                    <td class="text-center">{{ record.get_trailer_dot_passed_inspection_display }}</td>
+                                    <td class="text-center">
+                                        <a class="btn btn-secondary btn-sm" title="Edit Repair Record"
+                                           href="{% url 'shop:trailer_dot_record_update' id=record.id pk=trailer.pk tid=trailer.trailer_identifier %}"><img
+                                                class="img-fluid" src="{% static "icons8-edit-property-48.png" %}"
+                                                alt="Update" width="25" height="25"></a>
+
+                                        <a class="btn btn-secondary btn-sm" title="Delete Repair Record"
+                                           href="{% url 'shop:trailer_dot_record_delete' id=record.id pk=trailer.pk tid=trailer.trailer_identifier %}"><img
+                                                class="img-responsive" src="{% static "icons8-remove-48.png" %}"
+                                                alt="Delete" width="25" height="25"></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <!--Start Vehicle DOT Table Pagination -->
+                        <nav aria-label="..." class="text-center">
+                            <div>
+                                {% if dot_records_page_obj.has_previous %}
+                                    <a class="btn btn-outline-success mb-4" href="?page=1">First</a>
+                                    <a class="btn btn-outline-success mb-4"
+                                       href="?page={{ dot_records_page_obj.previous_page_number }}">Previous</a>
+                                {% endif %}
+
+                                {% for num in dot_records_page_obj.paginator.page_range %}
+                                    {% if dot_records_page_obj.number == num %}
+                                        <a class="btn btn-success mb-4" href="?page={{ num }}">{{ num }}</a>
+                                    {% elif num > dot_records_page_obj.number|add:'-3' and num < dot_records_page_obj.number|add:'3' %}
+                                        <a class="btn btn-outline-success mb-4" href="?page={{ num }}">{{ num }}</a>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if dot_records_page_obj.has_next %}
+                                    <a class="btn btn-outline-success mb-4"
+                                       href="?page={{ dot_records_page_obj.next_page_number }}">Next</a>
+                                    <a class="btn btn-outline-success mb-4"
+                                       href="?page={{ dot_records_page_obj.paginator.num_pages }}">Last</a>
+                                {% endif %}
+                            </div>
+                            <!-- End Service Record Pagination -->
+                        </nav>
+                        <!-- ######### -->
+                        <!--End Repair Records Area -->
+                        <!--########## -->
+
+
+                        <!-- ######### -->
+                        <!--Start Repair Records Area -->
+                        <!--########## -->
+                    </div>
+
+
                 </div>
-
-
             </div>
+
+
+            <!-- End Tabs of Tabs -->
         </div>
-
-
-        <!-- End Tabs of Tabs -->
-    </div>
-    <!--End Vehicle Block -->
+        <!--End Vehicle Block -->
     </div>
     <script>
         const pillsTab = document.querySelector('#pills-tab');

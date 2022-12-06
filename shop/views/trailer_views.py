@@ -187,10 +187,10 @@ class TrailerUpdate2(UpdateView):
         obj = Trailer.objects.get(trailer_id=self.kwargs['pk'])
         return obj
 
-
-class TrailerUpdate3(UpdateView):
-    form_class = UpdateTrailerForm3
-    template_name = 'shop/trailer_update_form.html'
+# Move this Function to Details Section (Update1)
+# class TrailerUpdate3(UpdateView):
+#     form_class = UpdateTrailerForm3
+#     template_name = 'shop/trailer_update_form.html'
 
     # success_url = reverse_lazy('shop:list_vehicles')
 

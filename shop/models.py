@@ -8,7 +8,7 @@ ASSIGNED_DEPARTMENT = [('', 'Select One'),
                        (10, 'Construction'),
                        (20, 'Maintenance'),
                        (50, 'Admin')]
-
+TRACK_WEEKLY = [(True, 'Yes'), (False, 'No')]
 
 # Create your models here.
 class Trailer(models.Model):
@@ -55,7 +55,9 @@ class Vehicle(models.Model):
     last_service_miles = models.IntegerField(blank=True, null=True)
     next_service = models.DateField(blank=True, null=True)
     next_service_miles = models.IntegerField(blank=True, null=True)
-    # weekly_hours = models.IntegerField(blank=True, null=True)
+    track_weekly_miles = models.BooleanField(choices=TRACK_WEEKLY, default=False, blank=False)
+    weekly_miles = models.IntegerField(blank=True, null=True)
+    last_weekly_check = models.DateField(blank=True, null=True)
 
     # DOT Attributes
     last_dot = models.DateField(blank=True, null=True)

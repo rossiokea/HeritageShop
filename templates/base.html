@@ -55,10 +55,22 @@
 
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <ul class="navbar-nav">
-
-                <li class="nav-item {{ service_nav }}">
-                    <a class="nav-link" href="{% url 'shop:all_service_tasks' %}">Service Tasks</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">Service Tasks </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                        <li class="nav-item {{ service_nav }}">
+                            <a class="dropdown-item" href="{% url 'shop:all_service_tasks' %}">Service Tasks</a>
+                        </li>
+                        <li class="nav-item {{ weekly_nav }}">
+                            <a class="dropdown-item" href="{% url 'shop:weekly_service_tasks' %}">Weekly Check Tasks</a>
+                        </li>
+                    </ul>
                 </li>
+{# MOve this to a drop list for service tasks and weekly checks#}
+{#                <li class="nav-item {{ service_nav }}">#}
+{#                    <a class="nav-link" href="{% url 'shop:all_service_tasks' %}">Service Tasks</a>#}
+{#                </li>#}
                 <li class="nav-item {{ dot_nav }}">
                     <a class="nav-link" href="{% url 'shop:all_dot_tasks' %}">DOT Tasks</a>
                 </li>
@@ -74,9 +86,8 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        Create
-                    </a>
+                       data-bs-toggle="dropdown" aria-expanded="false">Create</a>
+
                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                         <li><a class="dropdown-item" href="{% url 'shop:vehicle_create' %}">Vehicle</a></li>
                         <li><a class="dropdown-item" href="{% url 'shop:trailer_create' %}">Trailer</a></li>

@@ -37,6 +37,8 @@ class CreateEquipmentForm(forms.ModelForm):
         self.fields['equipment_description'].widget.attrs['class'] = 'form-control'
         self.fields['equipment_description'].widget.attrs['style'] = 'width:60ch'
 
+
+
     class Meta:
         model = Equipment
         fields = ['equipment_vin', 'equipment_identifier',
@@ -71,6 +73,24 @@ class UpdateEquipmentForm1(forms.ModelForm):
         self.fields['equipment_description'].widget.attrs['class'] = 'form-control'
         self.fields['equipment_description'].widget.attrs['style'] = 'width:60ch'
 
+        self.fields['equipment_identifier'].disabled = True
+        self.fields['equipment_identifier'].widget.attrs['class'] = 'form-control'
+        self.fields['equipment_identifier'].label = 'Heritage Equip#'
+        self.fields['equipment_identifier'].widget.attrs['style'] = 'width:15ch'
+        self.fields['equipment_identifier'].widget.attrs['placeholder'] = 'XXX'
+
+        self.fields['equipment_department'].widget.attrs['class'] = 'form-control'
+        self.fields['equipment_department'].label = 'Heritage Dept:'
+        self.fields['equipment_department'].widget.attrs['style'] = 'width:20ch'
+
+        self.fields['equipment_assigned_employee'].widget.attrs['class'] = 'form-control'
+        self.fields['equipment_assigned_employee'].label = 'Assigned Employee'
+        self.fields['equipment_assigned_employee'].widget.attrs['style'] = 'width:50ch'
+
+        self.fields['equipment_assigned_project'].widget.attrs['class'] = 'form-control'
+        self.fields['equipment_assigned_project'].label = 'Assigned Project'
+        self.fields['equipment_assigned_project'].widget.attrs['style'] = 'width:75ch'
+
         self.fields['equipment_status'].label = 'Status'
         self.fields['equipment_status'].widget.attrs['class'] = 'form-control'
         self.fields['equipment_status'].widget.attrs['style'] = 'width:15ch'
@@ -78,8 +98,10 @@ class UpdateEquipmentForm1(forms.ModelForm):
     class Meta:
         model = Equipment
         fields = ['equipment_vin', 'equipment_identifier',
-                  'equipment_short_name', 'equipment_description', 'equipment_status']
+                  'equipment_short_name', 'equipment_description', 'equipment_department',
+                  'equipment_assigned_employee','equipment_assigned_project', 'equipment_status']
 
+        widgets = {'equipment_department': forms.Select(choices=department_choices)}
 
 class UpdateEquipmentForm2(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -122,36 +144,36 @@ class UpdateEquipmentForm2(forms.ModelForm):
                    'equipment_next_service': DateInput(),
                    }
 
-
-class UpdateEquipmentForm3(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super(UpdateEquipmentForm3, self).__init__(*args, **kwargs)
-
-        self.fields['equipment_identifier'].disabled = True
-        self.fields['equipment_identifier'].widget.attrs['class'] = 'form-control'
-        self.fields['equipment_identifier'].label = 'Heritage Equip#'
-        self.fields['equipment_identifier'].widget.attrs['style'] = 'width:15ch'
-        self.fields['equipment_identifier'].widget.attrs['placeholder'] = 'XXX'
-
-        self.fields['equipment_department'].widget.attrs['class'] = 'form-control'
-        self.fields['equipment_department'].label = 'Heritage Dept:'
-        self.fields['equipment_department'].widget.attrs['style'] = 'width:20ch'
-
-        self.fields['equipment_assigned_employee'].widget.attrs['class'] = 'form-control'
-        self.fields['equipment_assigned_employee'].label = 'Assigned Employee'
-        self.fields['equipment_assigned_employee'].widget.attrs['style'] = 'width:50ch'
-
-        self.fields['equipment_assigned_project'].widget.attrs['class'] = 'form-control'
-        self.fields['equipment_assigned_project'].label = 'Assigned Project'
-        self.fields['equipment_assigned_project'].widget.attrs['style'] = 'width:75ch'
-
-    class Meta:
-        model = Equipment
-        fields = ['equipment_identifier', 'equipment_department', 'equipment_assigned_employee',
-                  'equipment_assigned_project']
-
-        widgets = {'equipment_department': forms.Select(choices=department_choices)}
-
+#  Move to the Details section Update1
+# class UpdateEquipmentForm3(forms.ModelForm):
+#     def __init__(self, *args, **kwargs):
+#         super(UpdateEquipmentForm3, self).__init__(*args, **kwargs)
+#
+#         self.fields['equipment_identifier'].disabled = True
+#         self.fields['equipment_identifier'].widget.attrs['class'] = 'form-control'
+#         self.fields['equipment_identifier'].label = 'Heritage Equip#'
+#         self.fields['equipment_identifier'].widget.attrs['style'] = 'width:15ch'
+#         self.fields['equipment_identifier'].widget.attrs['placeholder'] = 'XXX'
+#
+#         self.fields['equipment_department'].widget.attrs['class'] = 'form-control'
+#         self.fields['equipment_department'].label = 'Heritage Dept:'
+#         self.fields['equipment_department'].widget.attrs['style'] = 'width:20ch'
+#
+#         self.fields['equipment_assigned_employee'].widget.attrs['class'] = 'form-control'
+#         self.fields['equipment_assigned_employee'].label = 'Assigned Employee'
+#         self.fields['equipment_assigned_employee'].widget.attrs['style'] = 'width:50ch'
+#
+#         self.fields['equipment_assigned_project'].widget.attrs['class'] = 'form-control'
+#         self.fields['equipment_assigned_project'].label = 'Assigned Project'
+#         self.fields['equipment_assigned_project'].widget.attrs['style'] = 'width:75ch'
+#
+#     class Meta:
+#         model = Equipment
+#         fields = ['equipment_identifier', 'equipment_department', 'equipment_assigned_employee',
+#                   'equipment_assigned_project']
+#
+#         widgets = {'equipment_department': forms.Select(choices=department_choices)}
+#
 
 class ServiceRecordCreateForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):

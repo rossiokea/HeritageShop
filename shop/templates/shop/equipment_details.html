@@ -30,9 +30,22 @@
                             <div class="col-4 text-muted">Description:</div>
                             <div class="col-8 text-dark text-align-left">{{ equipment.equipment_description }}</div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-4 text-muted">Assigned Dept:</div>
+                            <div class="col-8 text-dark text-align-left">{{ equipment.get_equipment_department_display }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 text-muted">Assigned User:</div>
+                            <div class="col-8 text-dark text-align-left">{{ equipment.equipment_assigned_employee }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 text-muted">Project:</div>
+                            <div class="col-8 text-dark text-align-left">{{ equipment.equipment_assigned_project }}</div>
+                        </div>
                         <div class="row">
                             <div class="col-4 text-muted">Status:</div>
-                            <div class="col-8 text-dark text-align-left">{{ equipment.get_equipment_status_display}}</div>
+                            <div class="col-8 text-dark text-align-left">{{ equipment.get_equipment_status_display }}</div>
                         </div>
                     </div>
                 </div>
@@ -68,26 +81,27 @@
                     </div>
                 </div>
                 <!-- Start General Info Card Section -->
-                <div class="card wrap text-left kr_border_container1 m-2 p-2 rounded">
-                    <a href="{% url 'shop:equipment_update3' pk=equipment.pk %}"></a>
-                    <div class="text-left">
-                        <div class="kr_text_info_heading">General Info:</div>
-                        <div class="">
-                            <div class="row">
-                                <div class="col-4 text-muted">Assigned Dept:</div>
-                                <div class="col-8 text-dark text-align-left">{{ equipment.get_equipment_department_display}}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-4 text-muted">Assigned User:</div>
-                                <div class="col-8 text-dark text-align-left">{{ equipment.equipment_assigned_employee }}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-4 text-muted">Project:</div>
-                                <div class="col-8 text-dark text-align-left">{{ equipment.equipment_assigned_project }}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+{#      Moved this to the Details Section Above          #}
+{#                <div class="card wrap text-left kr_border_container1 m-2 p-2 rounded">#}
+{#                    <a href="{% url 'shop:equipment_update3' pk=equipment.pk %}"></a>#}
+{#                    <div class="text-left">#}
+{#                        <div class="kr_text_info_heading">General Info:</div>#}
+{#                        <div class="">#}
+{#                            <div class="row">#}
+{#                                <div class="col-4 text-muted">Assigned Dept:</div>#}
+{#                                <div class="col-8 text-dark text-align-left">{{ equipment.get_equipment_department_display }}</div>#}
+{#                            </div>#}
+{#                            <div class="row">#}
+{#                                <div class="col-4 text-muted">Assigned User:</div>#}
+{#                                <div class="col-8 text-dark text-align-left">{{ equipment.equipment_assigned_employee }}</div>#}
+{#                            </div>#}
+{#                            <div class="row">#}
+{#                                <div class="col-4 text-muted">Project:</div>#}
+{#                                <div class="col-8 text-dark text-align-left">{{ equipment.equipment_assigned_project }}</div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
                 <!-- End General Info Card Section-->
                 <!-- Start DOT Info Card Section -->
 

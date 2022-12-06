@@ -189,12 +189,12 @@ class EquipmentUpdate2(UpdateView):
         obj = Equipment.objects.get(equipment_id=self.kwargs['pk'])
         return obj
 
-
-class EquipmentUpdate3(UpdateView):
-    form_class = UpdateEquipmentForm3
-    template_name = 'shop/equipment_update_form.html'
-
-    # success_url = reverse_lazy('shop:list_vehicles')
+# Move to the Details area (Update1)
+# class EquipmentUpdate3(UpdateView):
+#     form_class = UpdateEquipmentForm3
+#     template_name = 'shop/equipment_update_form.html'
+#
+#     # success_url = reverse_lazy('shop:list_vehicles')
 
     def get_success_url(self, *args, **kwargs):
         print(self.kwargs)

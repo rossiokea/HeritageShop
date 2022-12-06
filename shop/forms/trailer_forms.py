@@ -78,6 +78,10 @@ class UpdateTrailerForm1(forms.ModelForm):
         self.fields['trailer_description'].widget.attrs['class'] = 'form-control'
         self.fields['trailer_description'].widget.attrs['style'] = 'width:60ch'
 
+        self.fields['trailer_department'].widget.attrs['class'] = 'form-control'
+        self.fields['trailer_department'].label = 'Heritage Dept:'
+        self.fields['trailer_department'].widget.attrs['style'] = 'width:20ch'
+
         self.fields['trailer_status'].label = 'Status'
         self.fields['trailer_status'].widget.attrs['class'] = 'form-control'
         self.fields['trailer_status'].widget.attrs['style'] = 'width:15ch'
@@ -85,8 +89,8 @@ class UpdateTrailerForm1(forms.ModelForm):
     class Meta:
         model = Trailer
         fields = ['trailer_identifier', 'trailer_license', 'trailer_vin',
-                  'trailer_short_name', 'trailer_description', 'trailer_status']
-
+                  'trailer_short_name', 'trailer_description', 'trailer_department','trailer_status']
+        widgets = {'trailer_department': forms.Select(choices=department_choices), }
 
 class UpdateTrailerForm2(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -119,28 +123,28 @@ class UpdateTrailerForm2(forms.ModelForm):
                    'trailer_next_service': DateInput(),
                    }
 
-
-class UpdateTrailerForm3(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super(UpdateTrailerForm3, self).__init__(*args, **kwargs)
-
-        self.fields['trailer_identifier'].disabled = True
-        self.fields['trailer_identifier'].widget.attrs['class'] = 'form-control'
-        self.fields['trailer_identifier'].label = 'Heritage Equip#'
-        self.fields['trailer_identifier'].widget.attrs['style'] = 'width:15ch'
-        self.fields['trailer_identifier'].widget.attrs['placeholder'] = 'XXX'
-
-        self.fields['trailer_department'].widget.attrs['class'] = 'form-control'
-        self.fields['trailer_department'].label = 'Heritage Dept:'
-        self.fields['trailer_department'].widget.attrs['style'] = 'width:20ch'
-
-    class Meta:
-        model = Trailer
-        fields = ['trailer_identifier', 'trailer_department']
-        # fields = ['service_period', 'last_service', 'last_service_miles',
-        #        'next_service']
-
-        widgets = {'trailer_department': forms.Select(choices=department_choices), }
+#  Moved to the Details Section (Update1)
+# class UpdateTrailerForm3(forms.ModelForm):
+#     def __init__(self, *args, **kwargs):
+#         super(UpdateTrailerForm3, self).__init__(*args, **kwargs)
+#
+#         self.fields['trailer_identifier'].disabled = True
+#         self.fields['trailer_identifier'].widget.attrs['class'] = 'form-control'
+#         self.fields['trailer_identifier'].label = 'Heritage Equip#'
+#         self.fields['trailer_identifier'].widget.attrs['style'] = 'width:15ch'
+#         self.fields['trailer_identifier'].widget.attrs['placeholder'] = 'XXX'
+#
+#         self.fields['trailer_department'].widget.attrs['class'] = 'form-control'
+#         self.fields['trailer_department'].label = 'Heritage Dept:'
+#         self.fields['trailer_department'].widget.attrs['style'] = 'width:20ch'
+#
+#     class Meta:
+#         model = Trailer
+#         fields = ['trailer_identifier', 'trailer_department']
+#         # fields = ['service_period', 'last_service', 'last_service_miles',
+#         #        'next_service']
+#
+#         widgets = {'trailer_department': forms.Select(choices=department_choices), }
 
 
 class UpdateTrailerForm4(forms.ModelForm):

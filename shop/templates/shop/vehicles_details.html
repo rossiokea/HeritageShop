@@ -34,10 +34,31 @@
                             <div class="col-4 text-muted">Description:</div>
                             <div class="col-8 text-dark text-align-left">{{ vehicle.vehicle_description }}</div>
                         </div>
-                        <div class="row">
-                            <div class="col-4 text-muted">Status:</div>
-                            <div class="col-8 text-dark text-align-left">{{ vehicle.get_vehicle_status_display }}</div>
+
+                        <div class="">
+                            <div class="row">
+                                <div class="col-4 text-muted">Assigned Dept:</div>
+                                <div class="col-8 text-dark text-align-left">{{ vehicle.get_vehicle_department_display }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-muted">Assigned Emp:</div>
+                                <div class="col-8 text-dark text-align-left">{{ vehicle.assigned_employee }}</div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-muted">Trailer:</div>
+                                <div class="col-8 text-dark text-align-left">{{ vehicle.assigned_trailer.trailer_identifier }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-muted">Track Miles:</div>
+                                <div class="col-8 text-dark text-align-left">{{ vehicle.get_track_weekly_miles_display }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 text-muted">Status:</div>
+                                <div class="col-8 text-dark text-align-left">{{ vehicle.get_vehicle_status_display }}</div>
+                            </div>
                         </div>
+
                     </div>
                 </div>
 
@@ -47,8 +68,8 @@
                         <div class="kr_text_info_heading">Service Info:</div>
                         <div class="">
                             <div class="row">
-                                <div class="col-6 text-muted">Service Period (mos):</div>
-                                <div class="col-6 text-dark text-align-left"> {{ vehicle.service_period }}</div>
+                                <div class="col-5 text-muted">Service Per. (mos):</div>
+                                <div class="col-7 text-dark text-align-left"> {{ vehicle.service_period }}</div>
                             </div>
                             <div class="row">
                                 <div class="col-5 text-muted">Last Service:</div>
@@ -56,7 +77,7 @@
 
                             </div>
                             <div class="row">
-                                <div class="col-5 text-muted">Current SVC Miles:</div>
+                                <div class="col-5 text-muted">Last SVC Miles:</div>
                                 <div class="col-7 text-dark text-align-left">{{ vehicle.last_service_miles }}</div>
                             </div>
                             <div class="row">
@@ -73,27 +94,28 @@
                     </div>
                 </div>
                 <!-- Start General Info Card Section -->
-                <div class="card wrap text-left kr_border_container1 m-2 p-2 rounded">
-                    <a href="{% url 'shop:vehicle_update3' pk=vehicle.pk %}"></a>
-                    <div class="text-left">
-                        <div class="kr_text_info_heading">General Info:</div>
-                        <div class="">
-                            <div class="row">
-                                <div class="col-5 text-muted">Assigned Dept:</div>
-                                <div class="col-7 text-dark text-align-left">{{ vehicle.get_vehicle_department_display }}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-5 text-muted">Assigned Emp:</div>
-                                <div class="col-7 text-dark text-align-left">{{ vehicle.assigned_employee }}</div>
-
-                            </div>
-                            <div class="row">
-                                <div class="col-5 text-muted">Trailer:</div>
-                                <div class="col-7 text-dark text-align-left">{{ vehicle.assigned_trailer.trailer_identifier }}</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {#       This has been moved to Main Section above         #}
+                {#                <div class="card wrap text-left kr_border_container1 m-2 p-2 rounded">#}
+                {#                    <a href="{% url 'shop:vehicle_update3' pk=vehicle.pk %}"></a>#}
+                {#                    <div class="text-left">#}
+                {#                        <div class="kr_text_info_heading">General Info:</div>#}
+                {#                        <div class="">#}
+                {#                            <div class="row">#}
+                {#                                <div class="col-5 text-muted">Assigned Dept:</div>#}
+                {#                                <div class="col-7 text-dark text-align-left">{{ vehicle.get_vehicle_department_display }}</div>#}
+                {#                            </div>#}
+                {#                            <div class="row">#}
+                {#                                <div class="col-5 text-muted">Assigned Emp:</div>#}
+                {#                                <div class="col-7 text-dark text-align-left">{{ vehicle.assigned_employee }}</div>#}
+                {##}
+                {#                            </div>#}
+                {#                            <div class="row">#}
+                {#                                <div class="col-5 text-muted">Trailer:</div>#}
+                {#                                <div class="col-7 text-dark text-align-left">{{ vehicle.assigned_trailer.trailer_identifier }}</div>#}
+                {#                            </div>#}
+                {#                        </div>#}
+                {#                    </div>#}
+                {#                </div>#}
                 <!-- End General Info Card Section-->
                 <!-- Start DOT Info Card Section -->
                 <div class="card wrap text-left kr_border_container1 m-2 p-2 rounded">

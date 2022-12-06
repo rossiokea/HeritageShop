@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+    <section class="container mt-5 border">
+        <h3 class="text-center">Weekly Service Miles Check</h3>
+
+        <table class="table table-striped table-bordered fs-5" id="service_table">
+            <tr class="border border-dark text-center">
+                <th>&nbsp;</th>
+                <th>Dept</th>
+                <th>Heritage ID</th>
+                <th>Short Description</th>
+                <th>Description</th>
+                <th>Service Date</th>
+            </tr>
+            <tbody>
+            {% for item in weekly_tasks %}
+                <tr>
+                    {% if item.next_service <= today %}
+                        <td style="background-color: red"><a
+                                href="{% url 'shop:detail_vehicles' pk=item.pk %}"><img
+                                src="{% static 'dump-truck.png' %}" width="25" height="25" alt=""></a>
+                        </td>
+                    {% else %}
+                        <td style="background-color: yellow">
+                            <a
+                                    href="{% url 'shop:detail_vehicles' pk=item.pk %}"><img
+                                    src="{% static 'dump-truck.png' %}" width="25" height="25" alt=""></a>
+                        </td>
+                    {% endif %}
+                    <td>{{ item.vehicle_department }}</td>
+                    <td>{{ item.vehicle_identifier }}</td>
+                    <td>{{ item.vehicle_short_name}}</td>
+                    <td>{{ item.vehicle_description }}</td>
+                    <td style="width:15ch">{{ item.last_weekly_check }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {# Start the Pagination Section       #}
+        <form action="" class="text-center">
+            <nav aria-label="...">
+                {% if weekly_tasks.has_previous %}
+                    <a class="btn btn-outline-success mb-4"
+                       href="?page={{ num }}&department={{ selected_department }}&q={{ selected_q }}&item_status={{ selected_item_status }}">First</a>
+                    <a class="btn btn-outline-success mb-4"
+                       href="?page={{ vehicles_page_obj.previous_page_number }}&department={{ selected_department }}&q={{ selected_q }}&item_status={{ selected_item_status }}">Previous</a>
+                {% endif %}
+
+                {% for num in weekly_tasks.paginator.page_range %}
+                    {% if weekly_tasks.number == num %}
+                        <a class="btn btn-success mb-4"
+                           href="?page={{ num }}">{{ num }}</a>
+                    {% elif num > weekly_tasks.number|add:'-3' and num < vehicles_page_obj.number|add:'3' %}
+                        <a class="btn btn-outline-success mb-4"
+                           href="?page={{ num }}">{{ num }}</a>
+                    {% endif %}
+                {% endfor %}
+                {% if weekly_tasks.has_next %}
+                    <a class="btn btn-outline-success mb-4"
+                       href="?page={{ weekly_tasks.next_page_number }}">Next</a>
+                    <a class="btn btn-outline-success mb-4"
+                       href="?page={{ weekly_tasks.paginator.num_pages }}">Last</a>
+                {% endif %}
+
+            </nav>
+        </form>
+        {# Endthe Pagination Section       #}
+    </section>
+
+    <script>
+        $(document).ready(function () {
+
+            $('#service_table tr').click(function () {
+                let href = $(this).find("a").attr("href");
+                if (href) {
+                    window.location = href;
+                }
+            });
+
+        });
+    </script>
+{% endblock content %}
+
+
+

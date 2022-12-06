@@ -79,6 +79,28 @@ class UpdateVehicleForm1(forms.ModelForm):
         self.fields['vehicle_description'].widget.attrs['class'] = 'form-control'
         self.fields['vehicle_description'].widget.attrs['style'] = 'width:60ch'
 
+        self.fields['vehicle_identifier'].widget.attrs['class'] = 'form-control'
+        self.fields['vehicle_identifier'].label = 'Heritage Equip#'
+        self.fields['vehicle_identifier'].widget.attrs['style'] = 'width:15ch'
+        self.fields['vehicle_identifier'].widget.attrs['placeholder'] = 'XXX'
+
+        self.fields['vehicle_department'].widget.attrs['class'] = 'form-control'
+        self.fields['vehicle_department'].label = 'Heritage Dept:'
+        self.fields['vehicle_department'].widget.attrs['style'] = 'width:20ch'
+
+        self.fields['assigned_employee'].widget.attrs['class'] = 'form-control'
+        self.fields['assigned_employee'].label = 'Assigned Employee'
+        self.fields['assigned_employee'].widget.attrs['style'] = 'width:50ch'
+
+        self.fields['assigned_trailer'].widget.attrs['class'] = 'form-control'
+        self.fields['assigned_trailer'].label = 'Assigned Trailer'
+        self.fields['assigned_trailer'].widget.attrs['style'] = 'width:40ch'
+
+
+        self.fields['track_weekly_miles'].label = 'Weekly Miles Ck'
+        self.fields['track_weekly_miles'].widget.attrs['class'] = 'form-control'
+        self.fields['track_weekly_miles'].widget.attrs['style'] = 'width:15ch'
+
         self.fields['vehicle_status'].label = 'Status'
         self.fields['vehicle_status'].widget.attrs['class'] = 'form-control'
         self.fields['vehicle_status'].widget.attrs['style'] = 'width:15ch'
@@ -86,8 +108,8 @@ class UpdateVehicleForm1(forms.ModelForm):
     class Meta:
         model = Vehicle
         fields = ['vehicle_license', 'vehicle_vin', 'vehicle_identifier',
-                  'vehicle_short_name', 'vehicle_description', 'vehicle_status']
-
+                  'vehicle_short_name', 'vehicle_description', 'vehicle_department',
+                  'assigned_employee', 'assigned_trailer', 'track_weekly_miles','vehicle_status']
 
 class UpdateVehicleForm2(forms.ModelForm):
     vehicle_department = forms.MultipleChoiceField
@@ -132,36 +154,35 @@ class UpdateVehicleForm2(forms.ModelForm):
                    'next_service': DateInput(),
                    }
 
-
-class UpdateVehicleForm3(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super(UpdateVehicleForm3, self).__init__(*args, **kwargs)
-        self.fields['vehicle_identifier'].disabled = True
-
-        self.fields['vehicle_identifier'].disabled = True
-        self.fields['vehicle_identifier'].widget.attrs['class'] = 'form-control'
-        self.fields['vehicle_identifier'].label = 'Heritage Equip#'
-        self.fields['vehicle_identifier'].widget.attrs['style'] = 'width:15ch'
-        self.fields['vehicle_identifier'].widget.attrs['placeholder'] = 'XXX'
-
-        self.fields['vehicle_department'].widget.attrs['class'] = 'form-control'
-        self.fields['vehicle_department'].label = 'Heritage Dept:'
-        self.fields['vehicle_department'].widget.attrs['style'] = 'width:20ch'
-
-        self.fields['assigned_employee'].widget.attrs['class'] = 'form-control'
-        self.fields['assigned_employee'].label = 'Assigned Employee'
-        self.fields['assigned_employee'].widget.attrs['style'] = 'width:50ch'
-
-        self.fields['assigned_trailer'].widget.attrs['class'] = 'form-control'
-        self.fields['assigned_trailer'].label = 'Assigned Trailer'
-        self.fields['assigned_trailer'].widget.attrs['style'] = 'width:40ch'
-
-    class Meta:
-        model = Vehicle
-        fields = ['vehicle_identifier', 'vehicle_department', 'assigned_employee', 'assigned_trailer']
-        # fields = ['service_period', 'last_service', 'last_service_miles',
-        #        'next_service']
-        widgets = {'vehicle_department': forms.Select(choices=department_choices), }
+# This Has been depricated as fields have been moved to UpdateVehicleForm1
+# class UpdateVehicleForm3(forms.ModelForm):
+#     def __init__(self, *args, **kwargs):
+#         super(UpdateVehicleForm3, self).__init__(*args, **kwargs)
+#         self.fields['vehicle_identifier'].disabled = True
+#
+#         self.fields['vehicle_identifier'].widget.attrs['class'] = 'form-control'
+#         self.fields['vehicle_identifier'].label = 'Heritage Equip#'
+#         self.fields['vehicle_identifier'].widget.attrs['style'] = 'width:15ch'
+#         self.fields['vehicle_identifier'].widget.attrs['placeholder'] = 'XXX'
+#
+#         self.fields['vehicle_department'].widget.attrs['class'] = 'form-control'
+#         self.fields['vehicle_department'].label = 'Heritage Dept:'
+#         self.fields['vehicle_department'].widget.attrs['style'] = 'width:20ch'
+#
+#         self.fields['assigned_employee'].widget.attrs['class'] = 'form-control'
+#         self.fields['assigned_employee'].label = 'Assigned Employee'
+#         self.fields['assigned_employee'].widget.attrs['style'] = 'width:50ch'
+#
+#         self.fields['assigned_trailer'].widget.attrs['class'] = 'form-control'
+#         self.fields['assigned_trailer'].label = 'Assigned Trailer'
+#         self.fields['assigned_trailer'].widget.attrs['style'] = 'width:40ch'
+#
+#     class Meta:
+#         model = Vehicle
+#         fields = ['vehicle_identifier', 'vehicle_department', 'assigned_employee', 'assigned_trailer']
+#         # fields = ['service_period', 'last_service', 'last_service_miles',
+#         #        'next_service']
+#         widgets = {'vehicle_department': forms.Select(choices=department_choices), }
 
 
 class UpdateVehicleForm4(forms.ModelForm):

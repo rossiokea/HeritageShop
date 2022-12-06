@@ -16,7 +16,7 @@ urlpatterns = [
     path('vehicile_create/', VehicleCreateView.as_view(), name='vehicle_create'),
     path('vehicile_update1/<int:pk>', VehicleUpdate1.as_view(), name='vehicle_update1'),
     path('vehicile_update2/<int:pk>', VehicleUpdate2.as_view(), name='vehicle_update2'),
-    path('vehicile_update3/<int:pk>', VehicleUpdate3.as_view(), name='vehicle_update3'),
+    # path('vehicile_update3/<int:pk>', VehicleUpdate3.as_view(), name='vehicle_update3'),
     path('vehicile_update4/<int:pk>', VehicleUpdate4.as_view(), name='vehicle_update4'),
 
     # Vehicle Service Records
@@ -56,7 +56,7 @@ urlpatterns = [
 
     path('trailer_update1/<int:pk>', TrailerUpdate1.as_view(), name='trailer_update1'),
     path('trailer_update2/<int:pk>', TrailerUpdate2.as_view(), name='trailer_update2'),
-    path('trailer_update3/<int:pk>', TrailerUpdate3.as_view(), name='trailer_update3'),
+    #path('trailer_update3/<int:pk>', TrailerUpdate3.as_view(), name='trailer_update3'),
     path('trailer_update4/<int:pk>', TrailerUpdate4.as_view(), name='trailer_update4'),
 
     path('trailer_service_record_create/<int:pk> <int:tid>', TrailerServiceRecordCreateView.as_view(),
@@ -89,7 +89,7 @@ urlpatterns = [
 
     path('eqiupment_update1/<int:pk>', EquipmentUpdate1.as_view(), name='equipment_update1'),
     path('equipment_update2/<int:pk>', EquipmentUpdate2.as_view(), name='equipment_update2'),
-    path('equipment_update3/<int:pk>', EquipmentUpdate3.as_view(), name='equipment_update3'),
+    #path('equipment_update3/<int:pk>', EquipmentUpdate3.as_view(), name='equipment_update3'),
     # path('equipment_update4/<int:pk>', EquipmentUpdate4.as_view(), name='equipment_update4'),
 
     path('equipment_service_record_create/<int:pk>', EquipmentServiceRecordCreateView.as_view(),
@@ -108,6 +108,9 @@ urlpatterns = [
 
     #  Service Tasks Menu Item
     path('all_service_tasks/', AllServiceTasksListView, name='all_service_tasks'),
+
+    # Weekly Service Miles Check Tasks
+    path('weekly_service_tasks/', WeeklyCheckView.as_view(), name='weekly_service_tasks'),
 
     # DOT Tasks Menu Item
     path('all_dot_tasks/', AllDotTasksListView, name='all_dot_tasks'),
