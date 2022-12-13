@@ -215,16 +215,25 @@ class VehicleUpdate2(UpdateView):
 
     # success_url = reverse_lazy('shop:list_vehicles')
 
+
+class VehicleUpdate2Weekly(UpdateView):
+    form_class = shop.forms.vehicle_forms.UpdateVehicleForm2Weekly
+    template_name = 'shop/vehicle_update_form.html'
+    pk_url_kwarg = Vehicle.vehicle_id
+
+    # success_url = reverse_lazy('shop:list_vehicles')
+
     def get_success_url(self, *args, **kwargs):
         print(self.kwargs)
         # return reverse_lazy("shop:detail_vehicles", kwargs={'pk': 1})
-        return reverse_lazy("shop:detail_vehicles", kwargs={'pk': self.kwargs['pk']})
+        return reverse_lazy("shop:weekly_service_tasks")
         # return reverse("shop:list_vehicles")
 
     def get_object(self, queryset=None):
         # get the existing object or created a new one
         obj = Vehicle.objects.get(vehicle_id=self.kwargs['pk'])
         return obj
+
 
 
 class VehicleUpdate4(UpdateView):
@@ -836,4 +845,4 @@ class WeeklyCheckView(View):
 
         # Return to the view template
         return render(request, 'shop/required_weekly_service_tasks.html', context=context_mod)
-        pass
+

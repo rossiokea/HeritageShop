@@ -111,6 +111,7 @@ urlpatterns = [
 
     # Weekly Service Miles Check Tasks
     path('weekly_service_tasks/', WeeklyCheckView.as_view(), name='weekly_service_tasks'),
+    path('vehicle_update2Weekly/<int:pk>', VehicleUpdate2Weekly.as_view(), name='vehicle_update2Weekly'),
 
     # DOT Tasks Menu Item
     path('all_dot_tasks/', AllDotTasksListView, name='all_dot_tasks'),

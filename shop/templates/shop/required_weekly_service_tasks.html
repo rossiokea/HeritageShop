@@ -13,29 +13,29 @@
                 <th>Dept</th>
                 <th>Heritage ID</th>
                 <th>Short Description</th>
-                <th>Description</th>
-                <th>Service Date</th>
+                <th>Weekly Miles</th>
+                <th>Next Service (Mi)</th>
             </tr>
             <tbody>
             {% for item in weekly_tasks %}
                 <tr>
                     {% if item.next_service <= today %}
                         <td style="background-color: red"><a
-                                href="{% url 'shop:detail_vehicles' pk=item.pk %}"><img
+                                href="{% url 'shop:vehicle_update2Weekly' pk=item.pk %}"><img
                                 src="{% static 'dump-truck.png' %}" width="25" height="25" alt=""></a>
                         </td>
                     {% else %}
                         <td style="background-color: yellow">
                             <a
-                                    href="{% url 'shop:detail_vehicles' pk=item.pk %}"><img
+                                    href="{% url 'shop:vehicle_update2Weekly' pk=item.pk %}"><img
                                     src="{% static 'dump-truck.png' %}" width="25" height="25" alt=""></a>
                         </td>
                     {% endif %}
                     <td>{{ item.vehicle_department }}</td>
                     <td>{{ item.vehicle_identifier }}</td>
                     <td>{{ item.vehicle_short_name}}</td>
-                    <td>{{ item.vehicle_description }}</td>
-                    <td style="width:15ch">{{ item.last_weekly_check }}</td>
+                    <td>{{ item.weekly_miles}}</td>
+                    <td style="width:15ch">{{ item.next_service_miles }}</td>
                 </tr>
             {% endfor %}
             </tbody>

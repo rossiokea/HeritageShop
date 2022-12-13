@@ -96,7 +96,6 @@ class UpdateVehicleForm1(forms.ModelForm):
         self.fields['assigned_trailer'].label = 'Assigned Trailer'
         self.fields['assigned_trailer'].widget.attrs['style'] = 'width:40ch'
 
-
         self.fields['track_weekly_miles'].label = 'Weekly Miles Ck'
         self.fields['track_weekly_miles'].widget.attrs['class'] = 'form-control'
         self.fields['track_weekly_miles'].widget.attrs['style'] = 'width:15ch'
@@ -109,7 +108,8 @@ class UpdateVehicleForm1(forms.ModelForm):
         model = Vehicle
         fields = ['vehicle_license', 'vehicle_vin', 'vehicle_identifier',
                   'vehicle_short_name', 'vehicle_description', 'vehicle_department',
-                  'assigned_employee', 'assigned_trailer', 'track_weekly_miles','vehicle_status']
+                  'assigned_employee', 'assigned_trailer', 'track_weekly_miles', 'vehicle_status']
+
 
 class UpdateVehicleForm2(forms.ModelForm):
     vehicle_department = forms.MultipleChoiceField
@@ -135,6 +135,10 @@ class UpdateVehicleForm2(forms.ModelForm):
         self.fields['last_service_miles'].widget.attrs['class'] = 'form-control'
         self.fields['last_service_miles'].widget.attrs['style'] = 'width:16ch'
 
+        self.fields['weekly_miles'].label = 'Weekly Miles'
+        self.fields['weekly_miles'].widget.attrs['class'] = 'form-control'
+        self.fields['weekly_miles'].widget.attrs['style'] = 'width:16ch'
+
         self.fields['next_service'].label = 'Next Service Date'
         self.fields['next_service'].widget.attrs['class'] = 'form-control'
         self.fields['next_service'].widget.attrs['style'] = 'width:16ch'
@@ -145,7 +149,8 @@ class UpdateVehicleForm2(forms.ModelForm):
 
     class Meta:
         model = Vehicle
-        fields = ['vehicle_identifier', 'service_period', 'last_service', 'last_service_miles', 'next_service',
+        fields = ['vehicle_identifier', 'service_period', 'last_service', 'last_service_miles', 'weekly_miles',
+                  'next_service',
                   'next_service_miles']
         # fields = ['service_period', 'last_service', 'last_service_miles',
         #        'next_service']
@@ -153,6 +158,7 @@ class UpdateVehicleForm2(forms.ModelForm):
         widgets = {'last_service': DateInput(),
                    'next_service': DateInput(),
                    }
+
 
 # This Has been depricated as fields have been moved to UpdateVehicleForm1
 # class UpdateVehicleForm3(forms.ModelForm):
@@ -183,6 +189,38 @@ class UpdateVehicleForm2(forms.ModelForm):
 #         # fields = ['service_period', 'last_service', 'last_service_miles',
 #         #        'next_service']
 #         widgets = {'vehicle_department': forms.Select(choices=department_choices), }
+
+
+class UpdateVehicleForm2Weekly(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(UpdateVehicleForm2Weekly, self).__init__(*args, **kwargs)
+
+
+        self.fields['vehicle_identifier'].disabled = True
+        self.fields['vehicle_identifier'].widget.attrs['class'] = 'form-control'
+        self.fields['vehicle_identifier'].label = 'Heritage Equip#'
+        self.fields['vehicle_identifier'].widget.attrs['style'] = 'width:15ch'
+        self.fields['vehicle_identifier'].widget.attrs['placeholder'] = 'XXX'
+
+        self.fields['last_service_miles'].label = 'Last Service Miles'
+        self.fields['last_service_miles'].widget.attrs['class'] = 'form-control'
+        self.fields['last_service_miles'].widget.attrs['style'] = 'width:16ch'
+
+        self.fields['weekly_miles'].label = 'Weekly Miles'
+        self.fields['weekly_miles'].widget.attrs['class'] = 'form-control'
+        self.fields['weekly_miles'].widget.attrs['style'] = 'width:16ch'
+
+        self.fields['next_service_miles'].label = 'Next Service Miles'
+        self.fields['next_service_miles'].widget.attrs['class'] = 'form-control'
+        self.fields['next_service_miles'].widget.attrs['style'] = 'width:16ch'
+
+
+    class Meta:
+        model = Vehicle
+        fields = ['vehicle_identifier', 'last_service_miles', 'weekly_miles', 'next_service_miles']
+        # fields = ['service_period', 'last_service', 'last_service_miles',
+        #        'next_service']
+
 
 
 class UpdateVehicleForm4(forms.ModelForm):
