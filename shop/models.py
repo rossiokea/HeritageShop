@@ -55,6 +55,8 @@ class Vehicle(models.Model):
     last_service_miles = models.IntegerField(blank=True, null=True)
     next_service = models.DateField(blank=True, null=True)
     next_service_miles = models.IntegerField(blank=True, null=True)
+
+    # Vehicles weekly mileage check
     track_weekly_miles = models.BooleanField(choices=TRACK_WEEKLY, default=False, blank=False)
     weekly_miles = models.IntegerField(blank=True, null=True)
     last_weekly_check = models.DateField(blank=True, null=True)
