@@ -388,7 +388,6 @@ class ServiceRecordCreateView(CreateView):
                 vehicle.service_period = service_period
             next_service = date_serviced + timedelta(weeks=(service_period * 4))
 
-
             print(next_service)
             vehicle.next_service = next_service
             #update the service date
@@ -397,6 +396,8 @@ class ServiceRecordCreateView(CreateView):
             vehicle.last_weekly_check = date_serviced
             #update the service miles
             vehicle.last_service_miles = miles
+            # update the weekly_miles with the mileage at service time
+            vehicle.weekly_miles = vehicle.last_service_miles
             #update the next service miles by adding the mileage period
             vehicle.next_service_miles = vehicle.last_service_miles + vehicle.service_period_miles
 
