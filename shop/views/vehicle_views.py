@@ -220,6 +220,10 @@ class VehicleUpdate2Weekly(UpdateView):
     pk_url_kwarg = Vehicle.vehicle_id
 
     # success_url = reverse_lazy('shop:list_vehicles')
+    def form_valid(self, form):
+        print("The Form is Valid")
+        print(f"form type: {type(form)}")
+        return super().form_valid(form)
 
     def get_success_url(self, *args, **kwargs):
         print(self.kwargs)
@@ -236,7 +240,7 @@ class VehicleUpdate2Weekly(UpdateView):
         print(f"****I  am in the POST method *******")
         request.POST = request.POST.copy()
         # request.POST['weekly_miles'] = 9999
-        # request.POST['last_weekly_check'] = date.today()
+        request.POST['last_weekly_check'] = date.today()
         print(f"kwargs are {request.POST}")
         return super(VehicleUpdate2Weekly, self).post(request, **kwargs)
         pass
@@ -851,6 +855,13 @@ class WeeklyCheckView(View):
         # Loop through the queryset and calculate mileage delta and set category base on difference
         # Over 500 miles left = 3, 500-0 left =2, passed mileage = 1
         for item in vehicles:
+
+            # Check to see if mileage has been populated yet if not then set to 0
+            if item.weekly_miles is None:
+                item.weekly_miles = 0
+            if item.next_service_miles is None:
+                item.next_service_miles = 0
+
             item.this_mileage_delta = item.next_service_miles - item.weekly_miles
             print(item.weekly_miles, item.next_service_miles)
             if item.this_mileage_delta <= 0:
@@ -878,6 +889,14 @@ class WeeklyCheckView(View):
         # context_mod = dict(weekly_tasks = weekly_tasks_page_obj)
         context_mod = {'weekly_tasks': weekly_tasks_page_obj}
         print(context_mod)
+
+        # update the menu bar with highlighted selection
+        context_mod['trailer_nav'] = ''
+        context_mod['vehicle_nav'] = ''
+        context_mod['equipment_nav'] = ''
+        context_mod['service_nav'] = 'active'
+        context_mod['dot_nav'] = ''
+
         # Return to the view template
         return render(request, 'shop/required_weekly_service_tasks.html', context=context_mod)
 

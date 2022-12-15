@@ -54,13 +54,13 @@ class Vehicle(models.Model):
     service_period_miles = models.IntegerField(blank=True, null=True)
 
     last_service = models.DateField(blank=True, null=True)
-    last_service_miles = models.IntegerField(blank=True, null=True)
+    last_service_miles = models.IntegerField(blank=True, null=True, default=0)
     next_service = models.DateField(blank=True, null=True)
-    next_service_miles = models.IntegerField(blank=True, null=True)
+    next_service_miles = models.IntegerField(blank=True, null=True, default=0)
 
     # Vehicles weekly mileage check
     track_weekly_miles = models.BooleanField(choices=TRACK_WEEKLY, default=False, blank=False)
-    weekly_miles = models.IntegerField(blank=True, null=True)
+    weekly_miles = models.IntegerField(blank=True, null=True, default=0)
     last_weekly_check = models.DateField(blank=True, null=True)
 
     # DOT Attributes
