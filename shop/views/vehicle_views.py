@@ -846,31 +846,28 @@ def AllDotTasksListView(request):
 class WeeklyCheckView(View):
     def get(self, request):
         # Query for the vehicles that are tracked weekly, Also Paginate at the same time with 15 items per page
-
         vehicles = Vehicle.objects.all().filter(track_weekly_miles=True)
 
+        # Loop through the queryset and calculate mileage delta and set category base on difference
+        # Over 500 miles left = 3, 500-0 left =2, passed mileage = 1
         for item in vehicles:
             item.this_mileage_delta = item.next_service_miles - item.weekly_miles
             print(item.weekly_miles, item.next_service_miles)
-            if item.next_service_miles - 500 < item.weekly_miles <= item.next_service_miles:
-                print(f"weekly_status = 2")
-                item.this_weekly_status = 2
-
-            elif item.weekly_miles > item.next_service_miles:
+            if item.this_mileage_delta <= 0:
                 print(f"weekly_status = 1")
                 item.this_weekly_status = 1
+            elif 500 >= item.this_mileage_delta > 0:
+                print(f"weekly_status = 2")
+                item.this_weekly_status = 2
             else:
                 print(f"weekly_status = 3")
                 item.this_weekly_status = 3
 
-        for item in vehicles:
-            print(item.this_mileage_delta)
-
         # resort base on mileage delta
-        # sorted(vehicles)
-        print(vehicles)
+        # print(vehicles)
         vehicles_sorted = sorted(vehicles, key=lambda x: x.this_mileage_delta, reverse=False)
-        print(vehicles_sorted)
+        # vehicles_sorted = sorted(vehicles, key=lambda x: x['this_mileage_delta'], reverse=False)
+        # print(vehicles_sorted)
         weekly_vehicles = Paginator(vehicles_sorted, 15)
 
         # Complete the Pagination process
