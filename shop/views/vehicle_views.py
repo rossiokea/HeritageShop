@@ -1,6 +1,6 @@
-import datetime
 import operator
-from datetime import timedelta
+from datetime import timedelta, datetime, date
+
 
 from django.http import HttpResponse
 
@@ -64,8 +64,8 @@ class ListVehiclesView(ListView):
 
         context_mod['vehicle_list'] = vehicles
 
-        context_mod['today'] = datetime.date.today()
-        context_mod['today_20'] = datetime.date.today() + timedelta(14)
+        context_mod['today'] = date.today()
+        context_mod['today_20'] = date.today() + timedelta(14)
         print(f"The Vehicle List Context is: {context_mod}")
         return context_mod
 
@@ -183,7 +183,6 @@ class VehicleUpdate1(UpdateView):
     def get_form_kwargs(self):
         """ Passes the request object to the form class.
          This is necessary to only display members that belong to a given user"""
-
         kwargs = super(VehicleUpdate1, self).get_form_kwargs()
         print(f"The kwargs are: {kwargs}")
         return kwargs
@@ -234,6 +233,14 @@ class VehicleUpdate2Weekly(UpdateView):
         obj = Vehicle.objects.get(vehicle_id=self.kwargs['pk'])
         return obj
 
+    def post(self, request, *args, **kwargs):
+        print(f"****I  am in the POST method *******")
+        request.POST = request.POST.copy()
+        #request.POST['weekly_miles'] = 9999
+        # request.POST['last_weekly_check'] = date.today()
+        print(f"kwargs are {request.POST}")
+        return super(VehicleUpdate2Weekly,self).post(request,**kwargs)
+        pass
 
 
 class VehicleUpdate4(UpdateView):
@@ -344,8 +351,8 @@ class SearchListVehiclesView(ListView):
         # context['vehicle_list'] = queryset
         # context_mod['vehicle_list'] = vehicles
 
-        context_mod['today'] = datetime.date.today()
-        context_mod['today_20'] = datetime.date.today() + timedelta(14)
+        context_mod['today'] = date.today()
+        context_mod['today_20'] = date.today() + timedelta(14)
         print(f"The Vehicle Search Context is: {context_mod}")
         return context_mod
 
@@ -366,7 +373,7 @@ class ServiceRecordCreateView(CreateView):
         print(form.cleaned_data.get('service_date'))
 
         # Grab the data from the service form
-        date = form.cleaned_data.get('service_date')
+        date_serviced = form.cleaned_data.get('service_date')
         miles = form.cleaned_data.get('service_miles')
 
         # Get the Current Vehicle we are working on
@@ -379,12 +386,19 @@ class ServiceRecordCreateView(CreateView):
                 print(f"I found service_period is none {service_period}")
                 service_period = 6
                 vehicle.service_period = service_period
-            next_service = date + timedelta(weeks=(service_period * 4))
+            next_service = date_serviced + timedelta(weeks=(service_period * 4))
+
 
             print(next_service)
             vehicle.next_service = next_service
-            vehicle.last_service = date
+            #update the service date
+            vehicle.last_service = date_serviced
+            #update the mileage check date
+            vehicle.last_weekly_check = date_serviced
+            #update the service miles
             vehicle.last_service_miles = miles
+            #update the next service miles by adding the mileage period
+            vehicle.next_service_miles = vehicle.last_service_miles + vehicle.service_period_miles
 
             # save to database
             vehicle.save()
@@ -707,8 +721,8 @@ class VehicleInactiveListView(ListView):
         # ***************** END PAGINATION **************************
         context['vehicle_list'] = Vehicle.objects.all().order_by('next_service')
         print(context['vehicle_list'])
-        context['today'] = datetime.date.today()
-        context['today_20'] = datetime.date.today() + timedelta(14)
+        context['today'] = date.today()
+        context['today_20'] = date.today() + timedelta(14)
 
         return context
 
@@ -718,8 +732,8 @@ def AllServiceTasksListView(request):
     print("I am getting all things that need service")
 
     # Get the dates for today and 14 days into the future for service date calculations
-    today = datetime.date.today()
-    today_20 = datetime.date.today() + timedelta(14)
+    today = date.today()
+    today_20 = date.today() + timedelta(14)
 
     # Get all the Objects that could require Servicing
     vehicles = Vehicle.objects.all().filter(next_service__lte=today_20) & Vehicle.objects.all().filter(
@@ -781,8 +795,8 @@ def AllServiceTasksListView(request):
 def AllDotTasksListView(request):
     print("Entering DOT Task List")
     # Get the dates for today and 14 days into the future for service date calculations
-    today = datetime.date.today()
-    today_20 = datetime.date.today() + timedelta(14)
+    today = date.today()
+    today_20 = date.today() + timedelta(14)
 
     # Get the Objects that will be evaluated for DOT Inspections
     vehicles = Vehicle.objects.all().filter(next_dot__lte=today_20)
@@ -832,7 +846,32 @@ def AllDotTasksListView(request):
 class WeeklyCheckView(View):
     def get(self, request):
         # Query for the vehicles that are tracked weekly, Also Paginate at the same time with 15 items per page
-        weekly_vehicles = Paginator(Vehicle.objects.all().filter(track_weekly_miles=True), 15)
+
+        vehicles = Vehicle.objects.all().filter(track_weekly_miles=True)
+
+        for item in vehicles:
+            item.this_mileage_delta = item.next_service_miles - item.weekly_miles
+            print(item.weekly_miles , item.next_service_miles)
+            if item.next_service_miles - 500 < item.weekly_miles <= item.next_service_miles:
+                print(f"weekly_status = 2")
+                item.this_weekly_status = 2
+
+            elif item.weekly_miles > item.next_service_miles:
+                print (f"weekly_status = 1")
+                item.this_weekly_status = 1
+            else:
+                print(f"weekly_status = 3")
+                item.this_weekly_status = 3
+
+        for item in vehicles:
+            print (item.this_mileage_delta)
+
+        # resort base on mileage delta
+        #sorted(vehicles)
+        print(vehicles)
+        vehicles1 = sorted(vehicles, key=lambda x: x.this_mileage_delta)
+        print(vehicles1)
+        weekly_vehicles = Paginator(vehicles1, 15)
 
         # Complete the Pagination process
         page_number = request.GET.get('page')
@@ -845,4 +884,21 @@ class WeeklyCheckView(View):
 
         # Return to the view template
         return render(request, 'shop/required_weekly_service_tasks.html', context=context_mod)
+
+# class VehicleUpdate3Weekly(View):
+#     form_class = shop.forms.vehicle_forms.UpdateVehicleForm2Weekly(initial={'last_weekly_check'})
+#
+#     template_name = 'shop/vehicle_update_form.html'
+#     pk_url_kwarg = Vehicle.vehicle_id
+#
+#     def get_success_url(self, *args, **kwargs):
+#         print(self.kwargs)
+#         # return reverse_lazy("shop:detail_vehicles", kwargs={'pk': 1})
+#         return reverse_lazy("shop:weekly_service_tasks")
+#         # return reverse("shop:list_vehicles")
+#
+#     def get_object(self, queryset=None):
+#         # get the existing object or created a new one
+#         obj = Vehicle.objects.get(vehicle_id=self.kwargs['pk'])
+#         return obj
 

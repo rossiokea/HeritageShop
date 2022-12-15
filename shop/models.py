@@ -51,6 +51,8 @@ class Vehicle(models.Model):
     assigned_trailer = models.OneToOneField(Trailer, on_delete=models.CASCADE, blank=True, null=True)
     # Service Attributes
     service_period = models.IntegerField(blank=True, null=True)
+    service_period_miles = models.IntegerField(blank=True, null=True)
+
     last_service = models.DateField(blank=True, null=True)
     last_service_miles = models.IntegerField(blank=True, null=True)
     next_service = models.DateField(blank=True, null=True)

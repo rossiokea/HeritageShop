@@ -72,6 +72,10 @@
                                 <div class="col-7 text-dark text-align-left"> {{ vehicle.service_period }}</div>
                             </div>
                             <div class="row">
+                                <div class="col-5 text-muted">Service Per. (mi):</div>
+                                <div class="col-7 text-dark text-align-left"> {{ vehicle.service_period_miles }}</div>
+                            </div>
+                            <div class="row">
                                 <div class="col-5 text-muted">Last Service:</div>
                                 <div class="col-7 text-dark text-align-left">{{ vehicle.last_service }}</div>
 
@@ -87,10 +91,10 @@
 
                             <!-- Weekly Mileage Check Attributes -->
                             {% if vehicle.track_weekly_miles %}
-                            <div class="row">
-                                <div class="col-5 text-muted">Weekly (Mi)</div>
-                                <div class="col-7 text-dark text-align-left">{{ vehicle.weekly_miles }}</div>
-                            </div>
+                                <div class="row">
+                                    <div class="col-5 text-muted">Weekly (Mi)</div>
+                                    <div class="col-7 text-dark text-align-left">{{ vehicle.weekly_miles }}</div>
+                                </div>
                             {% endif %}
                             <!-- Weekly Mileage Check Attributes -->
 
