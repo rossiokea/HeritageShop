@@ -871,7 +871,7 @@ class WeeklyCheckView(View):
         print(vehicles)
         vehicles_sorted = sorted(vehicles, key=lambda x: x.this_mileage_delta, reverse=False)
         print(vehicles_sorted)
-        weekly_vehicles = Paginator(vehicles_sorted, 2)
+        weekly_vehicles = Paginator(vehicles_sorted, 15)
 
         # Complete the Pagination process
         page_number = request.GET.get('page')
