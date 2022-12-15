@@ -52,9 +52,9 @@
             <nav aria-label="...">
                 {% if weekly_tasks.has_previous %}
                     <a class="btn btn-outline-success mb-4"
-                       href="?page={{ num }}&department={{ selected_department }}&q={{ selected_q }}&item_status={{ selected_item_status }}"> {{ 1 }}</a>
+                       href="?page={{ num }}"> {{ 1 }}</a>
                     <a class="btn btn-outline-success mb-4"
-                       href="?page={{ weekly_tasks.previous_page_number }}&department={{ selected_department }}&q={{ selected_q }}&item_status={{ selected_item_status }}"> << </a>
+                       href="?page={{ weekly_tasks.previous_page_number }}"> << </a>
                 {% endif %}
                 {% for num in weekly_tasks.paginator.page_range %}
                     {% if weekly_tasks.number == num %}
@@ -71,7 +71,6 @@
                     <a class="btn btn-outline-success mb-4"
                        href="?page={{ weekly_tasks.paginator.num_pages }}">{{ weekly_tasks.paginator.num_pages }}</a>
                 {% endif %}
-
             </nav>
         </form>
         {# Endthe Pagination Section       #}

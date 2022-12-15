@@ -1,7 +1,6 @@
 import operator
 from datetime import timedelta, datetime, date
 
-
 from django.http import HttpResponse
 
 from django.core.paginator import Paginator
@@ -236,10 +235,10 @@ class VehicleUpdate2Weekly(UpdateView):
     def post(self, request, *args, **kwargs):
         print(f"****I  am in the POST method *******")
         request.POST = request.POST.copy()
-        #request.POST['weekly_miles'] = 9999
+        # request.POST['weekly_miles'] = 9999
         # request.POST['last_weekly_check'] = date.today()
         print(f"kwargs are {request.POST}")
-        return super(VehicleUpdate2Weekly,self).post(request,**kwargs)
+        return super(VehicleUpdate2Weekly, self).post(request, **kwargs)
         pass
 
 
@@ -390,15 +389,15 @@ class ServiceRecordCreateView(CreateView):
 
             print(next_service)
             vehicle.next_service = next_service
-            #update the service date
+            # update the service date
             vehicle.last_service = date_serviced
-            #update the mileage check date
+            # update the mileage check date
             vehicle.last_weekly_check = date_serviced
-            #update the service miles
+            # update the service miles
             vehicle.last_service_miles = miles
             # update the weekly_miles with the mileage at service time
             vehicle.weekly_miles = vehicle.last_service_miles
-            #update the next service miles by adding the mileage period
+            # update the next service miles by adding the mileage period
             vehicle.next_service_miles = vehicle.last_service_miles + vehicle.service_period_miles
 
             # save to database
@@ -852,37 +851,36 @@ class WeeklyCheckView(View):
 
         for item in vehicles:
             item.this_mileage_delta = item.next_service_miles - item.weekly_miles
-            print(item.weekly_miles , item.next_service_miles)
+            print(item.weekly_miles, item.next_service_miles)
             if item.next_service_miles - 500 < item.weekly_miles <= item.next_service_miles:
                 print(f"weekly_status = 2")
                 item.this_weekly_status = 2
 
             elif item.weekly_miles > item.next_service_miles:
-                print (f"weekly_status = 1")
+                print(f"weekly_status = 1")
                 item.this_weekly_status = 1
             else:
                 print(f"weekly_status = 3")
                 item.this_weekly_status = 3
 
         for item in vehicles:
-            print (item.this_mileage_delta)
+            print(item.this_mileage_delta)
 
         # resort base on mileage delta
-        #sorted(vehicles)
+        # sorted(vehicles)
         print(vehicles)
-        vehicles1 = sorted(vehicles, key=lambda x: x.this_mileage_delta)
-        print(vehicles1)
-        weekly_vehicles = Paginator(vehicles1, 15)
+        vehicles_sorted = sorted(vehicles, key=lambda x: x.this_mileage_delta, reverse=False)
+        print(vehicles_sorted)
+        weekly_vehicles = Paginator(vehicles_sorted, 2)
 
         # Complete the Pagination process
         page_number = request.GET.get('page')
         weekly_tasks_page_obj = weekly_vehicles.get_page(page_number)
 
-        #Create and Add the info to the Context
-
-        #context_mod = dict(required_dot_tasks=dot_tasks_page_obj)
-        context_mod = dict(weekly_tasks = weekly_tasks_page_obj)
-
+        # Create and Add the info to the Context
+        # context_mod = dict(weekly_tasks = weekly_tasks_page_obj)
+        context_mod = {'weekly_tasks': weekly_tasks_page_obj}
+        print(context_mod)
         # Return to the view template
         return render(request, 'shop/required_weekly_service_tasks.html', context=context_mod)
 
@@ -902,4 +900,3 @@ class WeeklyCheckView(View):
 #         # get the existing object or created a new one
 #         obj = Vehicle.objects.get(vehicle_id=self.kwargs['pk'])
 #         return obj
-
