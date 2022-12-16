@@ -239,9 +239,11 @@ class VehicleUpdate2Weekly(UpdateView):
     def post(self, request, *args, **kwargs):
         print(f"****I  am in the POST method *******")
         request.POST = request.POST.copy()
+        #print(f"kwargs before {request.POST}")
         # request.POST['weekly_miles'] = 9999
-        request.POST['last_weekly_check'] = date.today()
-        print(f"kwargs are {request.POST}")
+        this_date = date.today()
+        request.POST['last_weekly_check'] = this_date
+        #print(f"kwargs after {request.POST}")
         return super(VehicleUpdate2Weekly, self).post(request, **kwargs)
         pass
 

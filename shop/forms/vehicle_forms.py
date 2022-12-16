@@ -226,10 +226,10 @@ class UpdateVehicleForm2Weekly(forms.ModelForm):
         self.fields['last_service_miles'].widget.attrs['class'] = 'form-control'
         self.fields['last_service_miles'].widget.attrs['style'] = 'width:16ch'
 
-        # self.fields['last_weekly_check'].label = 'Last Mileage Check'
-        # self.fields['last_weekly_check'].widget.attrs['class'] = 'form-control'
-        # self.fields['last_weekly_check'].widget.attrs['style'] = 'width:16ch'
-        # self.fields['last_weekly_check'].widget.attrs['value'] = date.today()
+        self.fields['last_weekly_check'].label = 'Last Mileage Check'
+        self.fields['last_weekly_check'].widget.attrs['class'] = 'form-control'
+        self.fields['last_weekly_check'].widget.attrs['style'] = 'width:16ch'
+        self.fields['last_weekly_check'].widget.attrs['value'] = date.today()
 
         self.fields['weekly_miles'].label = 'Weekly Miles'
         self.fields['weekly_miles'].widget.attrs['class'] = 'form-control'
@@ -241,7 +241,7 @@ class UpdateVehicleForm2Weekly(forms.ModelForm):
 
     class Meta:
         model = Vehicle
-        fields = ['vehicle_identifier', 'last_service_miles',  'weekly_miles', 'next_service_miles']
+        fields = ['vehicle_identifier', 'last_weekly_check','last_service_miles',  'weekly_miles', 'next_service_miles']
         # fields = ['service_period', 'last_service', 'last_service_miles',
         #        'next_service']
         widgets = {'last_weekly_check': DateInput()}
