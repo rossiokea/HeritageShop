@@ -1,0 +1,25 @@
+#build the image
+docker build --tag heritage-shop .
+
+#run docker image (create container)
+docker run --publish 8000:8000 heritage-shop
+docker run -d --name shop --publish 8000:8000 heritage-shop
+
+
+#Create Image of docker to share
+docker save heritage-shop -o heritage-shop.tar
+
+#Load the image
+docker load -i heritage-shop.tar
+
+
+# Management Commands
+# check docker process
+docker ps
+
+#Stop a Container
+docker stop shop
+
+# Remove the container
+docker -rm -f shop
+

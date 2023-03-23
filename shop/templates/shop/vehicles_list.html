@@ -102,14 +102,14 @@
                     <div class="col-sm text-center text-muted">
                         License:
                     </div>
-                    <div class="col-sm text-dark">{{ vehicle.vehicle_license }}</div>
+                    <div class="col-sm text-dark">{{ vehicle.vehicle_license | upper }}</div>
                 </div>
                 <div class="row">
                     <div class="col-sm text-center text-muted">
                         VIN:
                     </div>
                     <div class="col-sm text-dark">
-                        {{ vehicle.vehicle_vin }}
+                        {{ vehicle.vehicle_vin | upper }}
                     </div>
                 </div>
 
@@ -118,7 +118,7 @@
                         Short Name:
                     </div>
                     <div class="col-sm text-dark">
-                        {{ vehicle.vehicle_short_name }}
+                        {{ vehicle.vehicle_short_name | upper }}
                     </div>
                 </div>
 

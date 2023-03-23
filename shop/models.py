@@ -72,6 +72,9 @@ class Vehicle(models.Model):
         return f"Vehicle ID: {self.vehicle_identifier} License: {self.vehicle_license}"
 
 
+
+
+
 class VehicleServiceRecord(models.Model):
     # vehicle_id = models.IntegerField()
     service_date = models.DateField(blank=True, null=True)

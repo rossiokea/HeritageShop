@@ -110,7 +110,7 @@
                         License:
                     </div>
                     <div class="col-sm text-dark">
-                        {{ trailer.trailer_license }}
+                        {{ trailer.trailer_license | upper }}
                     </div>
                 </div>
                 <div class="row">
@@ -118,7 +118,7 @@
                         VIN:
                     </div>
                     <div class="col-sm text-dark">
-                        {{ trailer.trailer_vin }}
+                        {{ trailer.trailer_vin | upper }}
                     </div>
                 </div>
 
@@ -127,7 +127,7 @@
                         Short Name:
                     </div>
                     <div class="col-sm text-dark">
-                        {{ trailer.trailer_short_name }}
+                        {{ trailer.trailer_short_name | upper }}
                     </div>
                 </div>
                 <div class="row">
