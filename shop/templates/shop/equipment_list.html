@@ -74,7 +74,7 @@
                     {#<img src="..." class="card-img-top" alt="..."> #}
 
                     {% if equipment.equipment_next_service < today %}
-                        <div class="card-body border border-success border-3 rounded-4">
+                        <div class="card-body border border-danger border-3 rounded-4">
 
                     {% elif equipment.equipment_next_service < today_20 %}
                         <div class="card-body border border-warning border-3 rounded-4">
