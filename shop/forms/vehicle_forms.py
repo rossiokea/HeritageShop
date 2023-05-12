@@ -77,6 +77,7 @@ class UpdateVehicleForm1(forms.ModelForm):
         self.fields['vehicle_vin'].widget.attrs['style'] = 'width:27ch'
         self.fields['vehicle_vin'].widget.attrs['placeholder'] = 'Vehicle VIN'
 
+        self.fields['vehicle_identifier'].disabled = True
         self.fields['vehicle_identifier'].widget.attrs['class'] = 'form-control'
         self.fields['vehicle_identifier'].label = 'Heritage Equip#'
         self.fields['vehicle_identifier'].widget.attrs['style'] = 'width:15ch'
